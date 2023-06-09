@@ -42,74 +42,76 @@ namespace fagl {
 		std::string GetName() const;
 
 		/// <summary>
-		/// Returns the ka of the material, or AMBIENT_COLOR attribute.
+		/// Returns the ka of the material, or its AMBIENT_COLOR attribute.
 		/// </summary>
 		/// <returns> Ambient color coefficient.</returns>
 		glm::vec3 GetAmbient() const;
 
 		/// <summary>
-		/// Returns the kd of the material, or AMBIANT_COLOR attribute.
+		/// Returns the kd of the material, or its DIFFUSE_COLOR attribute.
 		/// </summary>
-		/// <returns> Ambient color coefficient.</returns>
+		/// <returns> Diffuse color coefficient.</returns>
 		glm::vec3 GetDiffuse() const;
 
+		/// <summary>
+		/// Returns the ks and ns of the material, or its SPECULAR_COLOR attribute.
+		/// </summary>
+		/// <returns> Specular color coefficient as xyz and Phong exponent as w.</returns>
 		glm::vec4 GetSpecular() const;
 
+		/// <summary>
+		/// Returns the tf and tr of the material, or its TRANSPERANCY attribute.
+		/// </summary>
+		/// <returns> Transmission color filter as xyz and transparency as w.</returns>
 		glm::vec4 GetTransperancy() const;
 
+		/// <summary>
+		/// Returns ni of the material, or its DENSITY attribute.
+		/// </summary>
+		/// <returns> Density.</returns>
 		float GetDensity() const;
+
+		/// <summary>
+		/// Returns illum of the material, or its ILLUMINATION_MODEL attribute.
+		/// </summary>
+		/// <returns> Illumination model.</returns>
 		int GetIlluminationModel() const;
 
+		/// <summary>
+		/// Returns the value of an attribute that has one element.
+		/// </summary>
+		/// <param name="type"> Type of the attribute.</param>
+		/// <returns> Value of the attribute.</returns>
 		glm::vec1 GetAttribute1(const ATTRIBUTE_TYPE type) const;
 
-		glm::vec2 GetAttribute2(const ATTRIBUTE_TYPE type) const {
-			if (IsCustomAttribute(type)) {
-				return GetCustom2(CustomAttributeIndex(type));
-			}
-			return glm::vec2();
-		}
-		glm::vec3 GetAttribute3(const ATTRIBUTE_TYPE type) const {
-			if (IsCustomAttribute(type)) {
-				return GetCustom3(CustomAttributeIndex(type));
-			}
-			switch (type)
-			{
-				case ATTRIBUTE_TYPE::AMBIENT_COLOR:
-					return GetAmbient();
-				case ATTRIBUTE_TYPE::DIFFUSE_COLOR:
-					return GetDiffuse();
-				default:
-					return glm::vec3();
-			}
-		}
-		glm::vec4 GetAttribute4(const ATTRIBUTE_TYPE type) const {
-			if (IsCustomAttribute(type)) {
-				return GetCustom4(CustomAttributeIndex(type));
-			}
-			switch (type) {
-				case ATTRIBUTE_TYPE::SPECULAR_COLOR:
-					return GetSpecular();
-				case ATTRIBUTE_TYPE::TRANSPERANCY:
-					return GetTransperancy();
-				default:
-					return glm::vec4();
-			}
-		}
-		glm::vec4 GetAttribute(const ATTRIBUTE_TYPE type) const {
-			unsigned int size = AttributeElementCount(type);
-			switch (size) {
-				case 4:
-					return glm::vec4(GetAttribute4(type));
-				case 3:
-					return glm::vec4(GetAttribute3(type), 0);
-				case 2:
-					return glm::vec4(GetAttribute2(type), 0, 0);
-				case 1:
-					return glm::vec4(GetAttribute1(type), 0, 0, 0);
-				default:
-					return glm::vec4();
-			}
-		}
+		/// <summary>
+		/// Returns the value of an attribute that has two elements.
+		/// </summary>
+		/// <param name="type"> Type of the attribute.</param>
+		/// <returns> Value of the attribute.</returns>
+		glm::vec2 GetAttribute2(const ATTRIBUTE_TYPE type) const;
+
+		/// <summary>
+		/// Returns the value of an attribute that has three elements.
+		/// </summary>
+		/// <param name="type"> Type of the attribute.</param>
+		/// <returns> Value of the attribute.</returns>
+		glm::vec3 GetAttribute3(const ATTRIBUTE_TYPE type) const;
+
+		/// <summary>
+		/// Returns the value of an attribute that has four elements.
+		/// </summary>
+		/// <param name="type"> Type of the attribute.</param>
+		/// <returns> Value of the attribute.</returns>
+		glm::vec4 GetAttribute4(const ATTRIBUTE_TYPE type) const;
+
+		/// <summary>
+		/// Returns the value of an attribute.
+		/// </summary>
+		/// <param name="type"> Type of the attribute.</param>
+		/// <returns> Value of the attribute.</returns>
+		glm::vec4 GetAttribute(const ATTRIBUTE_TYPE type) const;
+
 	};
 
 	std::vector<Material> ReadMaterialFile(const std::string& filename);

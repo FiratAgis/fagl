@@ -100,8 +100,8 @@ namespace fagl {
 	string Material::GetName() const { return name; }
 	vec3 Material::GetAmbient() const { return ka; }
 	vec3 Material::GetDiffuse() const { return kd; }
-	vec4 Material::GetSpecular() const { return glm::vec4(ks.x, ks.y, ks.z, ns); }
-	vec4 Material::GetTransperancy() const { return glm::vec4(tf.x, tf.y, tf.z, tr); }
+	vec4 Material::GetSpecular() const { return vec4(ks.x, ks.y, ks.z, ns); }
+	vec4 Material::GetTransperancy() const { return vec4(tf.x, tf.y, tf.z, tr); }
 	float Material::GetDensity() const { return ni; }
 	int Material::GetIlluminationModel() const { return illum; }
 
@@ -111,14 +111,65 @@ namespace fagl {
 		}
 		switch (type) {
 		case ATTRIBUTE_TYPE::DENSITY:
-			return glm::vec1(GetDensity());
+			return vec1(GetDensity());
 		case ATTRIBUTE_TYPE::ILLUMINATION_MODEL:
-			return glm::vec1(GetIlluminationModel());
+			return vec1(GetIlluminationModel());
 		default:
-			return glm::vec1();
+			return vec1();
 		}
 	}
 
+	vec2 Material::GetAttribute2(const ATTRIBUTE_TYPE type) const {
+		if (IsCustomAttribute(type)) {
+			return GetCustom2(CustomAttributeIndex(type));
+		}
+		return vec2();
+	}
+
+	vec3 Material::GetAttribute3(const ATTRIBUTE_TYPE type) const {
+		if (IsCustomAttribute(type)) {
+			return GetCustom3(CustomAttributeIndex(type));
+		}
+		switch (type)
+		{
+		case ATTRIBUTE_TYPE::AMBIENT_COLOR:
+			return GetAmbient();
+		case ATTRIBUTE_TYPE::DIFFUSE_COLOR:
+			return GetDiffuse();
+		default:
+			return vec3();
+		}
+	}
+
+	vec4 Material::GetAttribute4(const ATTRIBUTE_TYPE type) const {
+		if (IsCustomAttribute(type)) {
+			return GetCustom4(CustomAttributeIndex(type));
+		}
+		switch (type) {
+		case ATTRIBUTE_TYPE::SPECULAR_COLOR:
+			return GetSpecular();
+		case ATTRIBUTE_TYPE::TRANSPERANCY:
+			return GetTransperancy();
+		default:
+			return vec4();
+		}
+	}
+
+	vec4 Material::GetAttribute(const ATTRIBUTE_TYPE type) const {
+		unsigned int size = AttributeElementCount(type);
+		switch (size) {
+		case 4:
+			return vec4(GetAttribute4(type));
+		case 3:
+			return vec4(GetAttribute3(type), 0);
+		case 2:
+			return vec4(GetAttribute2(type), 0, 0);
+		case 1:
+			return vec4(GetAttribute1(type), 0, 0, 0);
+		default:
+			return vec4();
+		}
+	}
 
 	vector<string> SplitPrograms(const string& program) {
 		vector<std::string> retval;
