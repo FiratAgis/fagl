@@ -34,9 +34,36 @@ namespace fagl {
 			Mesh(const std::string& filename, const glm::vec3 offset = glm::vec3(0.0f, 0.0f, 0.0f), const glm::vec3 rotation = glm::vec3(0.0f, 0.0f, 0.0f), const glm::vec3 scale = glm::vec3(1.0f, 1.0f, 1.0f));
 			Mesh(const Mesh &mesh, const glm::vec3 offset = glm::vec3(0.0f, 0.0f, 0.0f), const glm::vec3 rotation = glm::vec3(0.0f, 0.0f, 0.0f), const glm::vec3 scale = glm::vec3(1.0f, 1.0f, 1.0f));
 			Mesh();
+
+			/// <summary>
+			/// Generates VAO from the given list of attributes.
+			/// </summary>
+			/// <param name="attributes"> Types of the attributes.</param>
+			/// <returns> Pointer to the VAO.</returns>
 			GLuint GenerateVAO(std::vector<ATTRIBUTE_TYPE> attributes);
+
+			/// <summary>
+			/// Generates VAO from the given attribute.
+			/// </summary>
+			/// <param name="attrib1"> Type of the attribute.</param>
+			/// <returns> Pointer to the VAO.</returns>
 			GLuint GenerateVAO(ATTRIBUTE_TYPE attrib1);
+
+			/// <summary>
+			/// Generates VAO from the given attributes.
+			/// </summary>
+			/// <param name="attrib1"> Type of the first attribute.</param>
+			/// <param name="attrib2"> Type of the second attribute.</param>
+			/// <returns>  Pointer to the VAO.</returns>
 			GLuint GenerateVAO(ATTRIBUTE_TYPE attrib1, ATTRIBUTE_TYPE attrib2);
+
+			/// <summary>
+			/// Generates VAO from the given attributes.
+			/// </summary>
+			/// <param name="attrib1"> Type of the first attribute.</param>
+			/// <param name="attrib2"> Type of the second attribute.</param>
+			/// <param name="attrib3"> Type of the third attribute.</param>
+			/// <returns>  Pointer to the VAO.</returns>
 			GLuint GenerateVAO(ATTRIBUTE_TYPE attrib1, ATTRIBUTE_TYPE attrib2, ATTRIBUTE_TYPE attrib3);
 	};
 }

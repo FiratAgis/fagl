@@ -31,6 +31,18 @@ namespace fagl {
 		/// <param name="m"> Material to be copied.</param>
 		Material(const Material& m);
 
+		/// <summary>
+		/// Creates material with given parameters.
+		/// </summary>
+		/// <param name="material_name"> Name of the material.</param>
+		/// <param name="material_ka"> Ambient color coefficient of the material.</param>
+		/// <param name="material_kd"> Diffuse color coefficient of the material.</param>
+		/// <param name="material_ks"> Specular color coefficient of the material.</param>
+		/// <param name="material_ns"> Phong exponent of the material.</param>
+		/// <param name="material_tr"> Transparency of the material.</param>
+		/// <param name="material_tf"> Transmission filter of the material.</param>
+		/// <param name="material_ni"> Density of the material.</param>
+		/// <param name="material_illum"> Illumination model of the material.</param>
 		Material(const std::string& material_name, const glm::vec3 material_ka, const glm::vec3 material_kd, const glm::vec3 material_ks, const float material_ns, const float material_tr, const glm::vec3 material_tf, const float material_ni, const int material_illum);
 		
 		Material();
