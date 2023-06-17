@@ -8,6 +8,61 @@ namespace fagl {
 	using std::cout;
 	using std::endl;
 
+	void faglGenTextures(GLsizei n, GLuint* textures)
+	{
+		glGenTextures(n, textures);
+	}
+
+	void faglGenTexture(GLuint* texture)
+	{
+		glGenTextures(1, texture);
+	}
+
+	void faglGenFramebuffers(GLsizei n, GLuint* ids)
+	{
+		glGenFramebuffers(n, ids);
+	}
+
+	void faglGenFramebuffer(GLuint* id)
+	{
+		glGenFramebuffers(1, id);
+	}
+
+	void faglBindFramebuffer(BIND_FRAMEBUFFER_TARGET target, GLuint framebuffer)
+	{
+		glBindFramebuffer((GLenum)target, framebuffer);
+	}
+
+	void faglBindFramebuffer(GLuint framebuffer)
+	{
+		glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
+	}
+
+	void faglUnbindFramebuffer()
+	{
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	}
+
+	void faglGenRenderbuffers(GLsizei n, GLuint* renderbuffers)
+	{
+		glGenRenderbuffers(n, renderbuffers);
+	}
+
+	void faglGenRenderbuffer(GLuint* renderbuffer)
+	{
+		glGenRenderbuffers(1, renderbuffer);
+	}
+
+	void faglBindRenderbuffer(GLuint renderbuffer)
+	{
+		glBindRenderbuffer(GL_RENDERBUFFER, renderbuffer);
+	}
+
+	void faglUnbindRenderbuffer()
+	{
+		glBindRenderbuffer(GL_RENDERBUFFER, 0);
+	}
+
 	void faglTexImage2D(TEXTURE_IMAGE_2D_TARGET target, GLint level, TEXTURE_IMAGE_2D_INTERNAL_FORMAT internalformat, GLsizei width, GLsizei height, TEXTURE_IMAGE_2D_FORMAT format, TEXTURE_IMAGE_2D_TYPE type, const void* data)
 	{
 		glTexImage2D((GLenum)target, level, (GLint)internalformat, width, height, 0, (GLenum)format, (GLenum)type, data);
@@ -91,7 +146,7 @@ namespace fagl {
 	GLuint CreateCubeMap(const string right, const string left, const string top, const string bottom, const string front, const string back)
 	{
 		GLuint textureID;
-		glGenTextures(1, &textureID);
+		faglGenTexture(&textureID);
 		faglBindTexture(BIND_TEXTURE_TARGET::TEXTURE_CUBE_MAP, textureID);
 
 		int rWidth, lWidth, tWidth, bWidth, fWidth, baWidth;
@@ -137,7 +192,7 @@ namespace fagl {
 		stbi_image_free(fData);
 		stbi_image_free(baData);
 
-		glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
+		faglEnable(ENABLE_CAPABILITY::TEXTURE_CUBE_MAP_SEAMLESS);
 
 		faglTexParameteri(TEXTURE_PARAMETER_TARGET::TEXTURE_CUBE_MAP, TEXTURE_PARAMETER_NAME::TEXTURE_MIN_FILTER, GL_LINEAR);
 		faglTexParameteri(TEXTURE_PARAMETER_TARGET::TEXTURE_CUBE_MAP, TEXTURE_PARAMETER_NAME::TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -155,7 +210,7 @@ namespace fagl {
 	GLuint CreateTexture(const string path)
 	{
 		GLuint texture;
-		glGenTextures(1, &texture);
+		faglGenTexture(&texture);
 		faglBindTexture(BIND_TEXTURE_TARGET::TEXTURE_2D, texture);
 
 		faglTexParameteri(TEXTURE_PARAMETER_TARGET::TEXTURE_2D, TEXTURE_PARAMETER_NAME::TEXTURE_WRAP_S, GL_REPEAT);
@@ -183,7 +238,7 @@ namespace fagl {
 	GLuint CreateCubeMap(const std::string right, const std::string left, const std::string top, const std::string bottom, const std::string front, const std::string back, const TEXTURE_IMAGE_2D_INTERNAL_FORMAT internalformat, const TEXTURE_IMAGE_2D_FORMAT format, const TEXTURE_IMAGE_2D_TYPE type)
 	{
 		GLuint textureID;
-		glGenTextures(1, &textureID);
+		faglGenTexture(&textureID);
 		faglBindTexture(BIND_TEXTURE_TARGET::TEXTURE_CUBE_MAP, textureID);
 
 		int rWidth, lWidth, tWidth, bWidth, fWidth, baWidth;
@@ -229,7 +284,7 @@ namespace fagl {
 		stbi_image_free(fData);
 		stbi_image_free(baData);
 
-		glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
+		faglEnable(ENABLE_CAPABILITY::TEXTURE_CUBE_MAP_SEAMLESS);
 
 		faglTexParameteri(TEXTURE_PARAMETER_TARGET::TEXTURE_CUBE_MAP, TEXTURE_PARAMETER_NAME::TEXTURE_MIN_FILTER, GL_LINEAR);
 		faglTexParameteri(TEXTURE_PARAMETER_TARGET::TEXTURE_CUBE_MAP, TEXTURE_PARAMETER_NAME::TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -248,7 +303,7 @@ namespace fagl {
 	GLuint CreateTexture(const std::string path, const TEXTURE_IMAGE_2D_INTERNAL_FORMAT internalformat, const TEXTURE_IMAGE_2D_FORMAT format, const TEXTURE_IMAGE_2D_TYPE type)
 	{
 		GLuint texture;
-		glGenTextures(1, &texture);
+		faglGenTexture(&texture);
 		faglBindTexture(BIND_TEXTURE_TARGET::TEXTURE_2D, texture);
 
 		faglTexParameteri(TEXTURE_PARAMETER_TARGET::TEXTURE_2D, TEXTURE_PARAMETER_NAME::TEXTURE_WRAP_S, GL_REPEAT);
@@ -275,9 +330,10 @@ namespace fagl {
 
 	void CreatePlainFrameBuffer(GLuint* framebuffer, GLuint* texture, const TEXTURE_IMAGE_2D_INTERNAL_FORMAT internalformat, const GLsizei width, const GLsizei height, const TEXTURE_IMAGE_2D_FORMAT format, const TEXTURE_IMAGE_2D_TYPE type)
 	{
-		glGenFramebuffers(1, framebuffer);
+		faglGenFramebuffer(framebuffer);
 
-		glGenTextures(1, texture);
+		faglGenTexture(texture);
+
 		faglBindTexture(BIND_TEXTURE_TARGET::TEXTURE_2D, *texture);
 		faglTexImage2D(TEXTURE_IMAGE_2D_TARGET::TEXTURE_2D, 0, internalformat, width, height, format, type, NULL);
 		faglTexParameteri(TEXTURE_PARAMETER_TARGET::TEXTURE_2D, TEXTURE_PARAMETER_NAME::TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -285,24 +341,24 @@ namespace fagl {
 
 		GLuint renderbuffer;
 
-		glGenRenderbuffers(1, &renderbuffer);
-		glBindRenderbuffer(GL_RENDERBUFFER, renderbuffer);
+		faglGenRenderbuffer(&renderbuffer);
+		faglBindRenderbuffer(renderbuffer);
 		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, width, height);
 
-		glBindFramebuffer(GL_FRAMEBUFFER, *framebuffer);
+		faglBindFramebuffer(*framebuffer);
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, *texture, 0);
 		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, renderbuffer);
 		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 			std::cout << "Framebuffer not complete!" << std::endl;
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		faglUnbindFramebuffer();
 	}
 
 	void CreateCubeFrameBuffer(GLuint* framebuffer, GLuint* texture, const TEXTURE_IMAGE_2D_INTERNAL_FORMAT internalformat, const GLsizei width, const GLsizei height, const TEXTURE_IMAGE_2D_FORMAT format, const TEXTURE_IMAGE_2D_TYPE type)
 	{
-		glGenFramebuffers(1, framebuffer);
-		glBindFramebuffer(GL_FRAMEBUFFER, *framebuffer);
+		faglGenFramebuffer(framebuffer);
+		faglBindFramebuffer(*framebuffer);
 
-		glGenTextures(1, texture);
+		faglGenTexture(texture);
 		faglBindTexture(BIND_TEXTURE_TARGET::TEXTURE_CUBE_MAP, *texture);
 
 		faglTexImage2D(TEXTURE_IMAGE_2D_TARGET::TEXTURE_CUBE_MAP_POSITIVE_X, 0, internalformat, width, height, format, type, NULL);
@@ -327,16 +383,16 @@ namespace fagl {
 
 		GLuint renderbuffer;
 
-		glGenRenderbuffers(1, &renderbuffer);
-		glBindRenderbuffer(GL_RENDERBUFFER, renderbuffer);
+		faglGenRenderbuffer(&renderbuffer);
+		faglBindRenderbuffer(renderbuffer);
 		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, width, height);
-		glBindRenderbuffer(GL_RENDERBUFFER, 0);
+		faglUnbindRenderbuffer();
 
 		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, renderbuffer);
 
 		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 			std::cout << "Framebuffer not complete!" << std::endl;
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		faglUnbindFramebuffer();
 	}
 
 

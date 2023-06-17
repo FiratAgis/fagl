@@ -5,6 +5,28 @@
 
 namespace fagl {
 
+	void faglGenTextures(GLsizei n, GLuint* textures);
+
+	void faglGenTexture(GLuint* texture);
+
+	void faglGenFramebuffers(GLsizei n, GLuint* ids);
+
+	void faglGenFramebuffer(GLuint* id);
+
+	void faglBindFramebuffer(BIND_FRAMEBUFFER_TARGET target, GLuint framebuffer);
+
+	void faglBindFramebuffer(GLuint framebuffer);
+
+	void faglUnbindFramebuffer();
+
+	void faglGenRenderbuffers(GLsizei n, GLuint* renderbuffers);
+
+	void faglGenRenderbuffer(GLuint* renderbuffer);
+
+	void faglBindRenderbuffer(GLuint renderbuffer);
+
+	void faglUnbindRenderbuffer();
+
 	void faglTexImage2D(TEXTURE_IMAGE_2D_TARGET target, GLint level, TEXTURE_IMAGE_2D_INTERNAL_FORMAT internalformat, GLsizei width, GLsizei height, TEXTURE_IMAGE_2D_FORMAT format, TEXTURE_IMAGE_2D_TYPE type, const void* data);
 
 	void faglBindTexture(BIND_TEXTURE_TARGET target, GLuint texture);
