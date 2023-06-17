@@ -1,5 +1,6 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
+#include "Texture.h"
 
 namespace fagl {
 	using std::string;
@@ -7,11 +8,91 @@ namespace fagl {
 	using std::cout;
 	using std::endl;
 
+	void faglTexImage2D(TEXTURE_IMAGE_2D_TARGET target, GLint level, TEXTURE_IMAGE_2D_INTERNAL_FORMAT internalformat, GLsizei width, GLsizei height, TEXTURE_IMAGE_2D_FORMAT format, TEXTURE_IMAGE_2D_TYPE type, const void* data)
+	{
+		glTexImage2D((GLenum)target, level, (GLint)internalformat, width, height, 0, (GLenum)format, (GLenum)type, data);
+	}
+
+	void faglBindTexture(BIND_TEXTURE_TARGET target, GLuint texture)
+	{
+		glBindTexture((GLenum)target, texture);
+	}
+
+	void faglTexParameterf(TEXTURE_PARAMETER_TARGET target, TEXTURE_PARAMETER_NAME pname, GLfloat param)
+	{
+		glTexParameterf((GLenum)target, (GLenum)pname, param);
+	}
+
+	void faglTexParameteri(TEXTURE_PARAMETER_TARGET target, TEXTURE_PARAMETER_NAME pname, GLint param)
+	{
+		glTexParameteri((GLenum)target, (GLenum)pname, param);
+	}
+
+	void faglTextureParameterf(GLuint texture, TEXTURE_PARAMETER_NAME pname, GLfloat param)
+	{
+		glTextureParameterf(texture, (GLenum)pname, param);
+	}
+
+	void faglTextureParameteri(GLuint texture, TEXTURE_PARAMETER_NAME pname, GLint param)
+	{
+		glTextureParameteri(texture, (GLenum)pname, param);
+	}
+
+	void faglTexParameterfv(TEXTURE_PARAMETER_TARGET target, TEXTURE_PARAMETER_NAME pname, const GLfloat* params)
+	{
+		glTexParameterfv((GLenum)target, (GLenum)pname, params);
+	}
+
+	void faglTexParameteriv(TEXTURE_PARAMETER_TARGET target, TEXTURE_PARAMETER_NAME pname, const GLint* params)
+	{
+		glTexParameteriv((GLenum)target, (GLenum)pname, params);
+	}
+
+	void faglTexParameterIiv(TEXTURE_PARAMETER_TARGET target, TEXTURE_PARAMETER_NAME pname, const GLint* params)
+	{
+		glTexParameterIiv((GLenum)target, (GLenum)pname, params);
+	}
+
+	void faglTexParameterIuiv(TEXTURE_PARAMETER_TARGET target, TEXTURE_PARAMETER_NAME pname, const GLuint* params)
+	{
+		glTexParameterIuiv((GLenum)target, (GLenum)pname, params);
+	}
+
+	void faglTextureParameterfv(GLuint texture, TEXTURE_PARAMETER_NAME pname, const GLfloat* params)
+	{
+		glTextureParameterfv(texture, (GLenum)pname, params);
+	}
+
+	void faglTextureParameteriv(GLuint texture, TEXTURE_PARAMETER_NAME pname, const GLint* params)
+	{
+		glTextureParameteriv(texture, (GLenum)pname, params);
+	}
+
+	void faglTextureParameterIiv(GLuint texture, TEXTURE_PARAMETER_NAME pname, const GLint* params)
+	{
+		glTextureParameterIiv(texture, (GLenum)pname, params);
+	}
+
+	void faglTextureParameterIuiv(GLuint texture, TEXTURE_PARAMETER_NAME pname, const GLuint* params)
+	{
+		glTextureParameterIuiv(texture, (GLenum)pname, params);
+	}
+
+	void faglPixelStoref(PIXEL_STORE_NAME pname, GLfloat param)
+	{
+		glPixelStoref((GLenum)pname, param);
+	}
+
+	void faglPixelStorei(PIXEL_STORE_NAME pname, GLint param)
+	{
+		glPixelStorei((GLenum)pname, param);
+	}
+
 	GLuint CreateCubeMap(const string right, const string left, const string top, const string bottom, const string front, const string back)
 	{
 		GLuint textureID;
 		glGenTextures(1, &textureID);
-		glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
+		faglBindTexture(BIND_TEXTURE_TARGET::TEXTURE_CUBE_MAP, textureID);
 
 		int rWidth, lWidth, tWidth, bWidth, fWidth, baWidth;
 		int rHeight, lHeight, tHeight, bHeight, fHeight, baHeight;
@@ -25,27 +106,27 @@ namespace fagl {
 		unsigned char* baData = stbi_load(back.c_str(), &baWidth, &baHeight, &baChannels, 0);
 
 		if (rData)
-			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X, 0, GL_RGB, rWidth, rHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, rData);
+			faglTexImage2D(TEXTURE_IMAGE_2D_TARGET::TEXTURE_CUBE_MAP_POSITIVE_X, 0, TEXTURE_IMAGE_2D_INTERNAL_FORMAT::RGB, rWidth, rHeight, TEXTURE_IMAGE_2D_FORMAT::RGB, TEXTURE_IMAGE_2D_TYPE::UNSIGNED_BYTE, rData);
 		else
 			cout << "Could not load right texture" << endl;
 		if (lData)
-			glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_X, 0, GL_RGB, lWidth, lHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, lData);
+			faglTexImage2D(TEXTURE_IMAGE_2D_TARGET::TEXTURE_CUBE_MAP_NEGATIVE_X, 0, TEXTURE_IMAGE_2D_INTERNAL_FORMAT::RGB, lWidth, lHeight, TEXTURE_IMAGE_2D_FORMAT::RGB, TEXTURE_IMAGE_2D_TYPE::UNSIGNED_BYTE, lData);
 		else
 			cout << "Could not load left texture" << endl;
 		if (tData)
-			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Y, 0, GL_RGB, tWidth, tHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, tData);
+			faglTexImage2D(TEXTURE_IMAGE_2D_TARGET::TEXTURE_CUBE_MAP_POSITIVE_Y, 0, TEXTURE_IMAGE_2D_INTERNAL_FORMAT::RGB, tWidth, tHeight, TEXTURE_IMAGE_2D_FORMAT::RGB, TEXTURE_IMAGE_2D_TYPE::UNSIGNED_BYTE, tData);
 		else
 			cout << "Could not load top texture" << endl;
 		if (bData)
-			glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, 0, GL_RGB, bWidth, bHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, bData);
+			faglTexImage2D(TEXTURE_IMAGE_2D_TARGET::TEXTURE_CUBE_MAP_NEGATIVE_Y, 0, TEXTURE_IMAGE_2D_INTERNAL_FORMAT::RGB, bWidth, bHeight, TEXTURE_IMAGE_2D_FORMAT::RGB, TEXTURE_IMAGE_2D_TYPE::UNSIGNED_BYTE, bData);
 		else
 			cout << "Could not load bottom texture" << endl;
 		if (fData)
-			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Z, 0, GL_RGB, fWidth, fHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, fData);
+			faglTexImage2D(TEXTURE_IMAGE_2D_TARGET::TEXTURE_CUBE_MAP_POSITIVE_Z, 0, TEXTURE_IMAGE_2D_INTERNAL_FORMAT::RGB, fWidth, fHeight, TEXTURE_IMAGE_2D_FORMAT::RGB, TEXTURE_IMAGE_2D_TYPE::UNSIGNED_BYTE, fData);
 		else
 			cout << "Could not load front texture" << endl;
 		if (baData)
-			glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, 0, GL_RGB, baWidth, baHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, baData);
+			faglTexImage2D(TEXTURE_IMAGE_2D_TARGET::TEXTURE_CUBE_MAP_NEGATIVE_Z, 0, TEXTURE_IMAGE_2D_INTERNAL_FORMAT::RGB, baWidth, baHeight, TEXTURE_IMAGE_2D_FORMAT::RGB, TEXTURE_IMAGE_2D_TYPE::UNSIGNED_BYTE, baData);
 		else
 			cout << "Could not load right texture" << endl;
 
@@ -58,11 +139,11 @@ namespace fagl {
 
 		glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
 
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+		faglTexParameteri(TEXTURE_PARAMETER_TARGET::TEXTURE_CUBE_MAP, TEXTURE_PARAMETER_NAME::TEXTURE_MIN_FILTER, GL_LINEAR);
+		faglTexParameteri(TEXTURE_PARAMETER_TARGET::TEXTURE_CUBE_MAP, TEXTURE_PARAMETER_NAME::TEXTURE_MAG_FILTER, GL_LINEAR);
+		faglTexParameteri(TEXTURE_PARAMETER_TARGET::TEXTURE_CUBE_MAP, TEXTURE_PARAMETER_NAME::TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		faglTexParameteri(TEXTURE_PARAMETER_TARGET::TEXTURE_CUBE_MAP, TEXTURE_PARAMETER_NAME::TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+		faglTexParameteri(TEXTURE_PARAMETER_TARGET::TEXTURE_CUBE_MAP, TEXTURE_PARAMETER_NAME::TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 
 
 		return textureID;
@@ -75,20 +156,20 @@ namespace fagl {
 	{
 		GLuint texture;
 		glGenTextures(1, &texture);
-		glBindTexture(GL_TEXTURE_2D, texture);
+		faglBindTexture(BIND_TEXTURE_TARGET::TEXTURE_2D, texture);
 
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		faglTexParameteri(TEXTURE_PARAMETER_TARGET::TEXTURE_2D, TEXTURE_PARAMETER_NAME::TEXTURE_WRAP_S, GL_REPEAT);
+		faglTexParameteri(TEXTURE_PARAMETER_TARGET::TEXTURE_2D, TEXTURE_PARAMETER_NAME::TEXTURE_WRAP_T, GL_REPEAT);
+		faglTexParameteri(TEXTURE_PARAMETER_TARGET::TEXTURE_2D, TEXTURE_PARAMETER_NAME::TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+		faglTexParameteri(TEXTURE_PARAMETER_TARGET::TEXTURE_2D, TEXTURE_PARAMETER_NAME::TEXTURE_MAG_FILTER, GL_LINEAR);
 
-		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+		faglPixelStorei(PIXEL_STORE_NAME::UNPACK_ALIGNMENT, 1);
 
 		int width, height, nrChannels;
 		unsigned char* data = stbi_load(path.c_str(), &width, &height, &nrChannels, 0);
 		if (data)
 		{
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			faglTexImage2D(TEXTURE_IMAGE_2D_TARGET::TEXTURE_2D, 0, TEXTURE_IMAGE_2D_INTERNAL_FORMAT::RGB, width, height, TEXTURE_IMAGE_2D_FORMAT::RGB, TEXTURE_IMAGE_2D_TYPE::UNSIGNED_BYTE, data);
 			glGenerateMipmap(GL_TEXTURE_2D);
 		}
 		else
@@ -99,11 +180,11 @@ namespace fagl {
 		return texture;
 	}
 
-	GLuint CreateCubeMap(const std::string right, const std::string left, const std::string top, const std::string bottom, const std::string front, const std::string back, const GLint internalformat, const GLint border, const GLenum format, const GLenum type)
+	GLuint CreateCubeMap(const std::string right, const std::string left, const std::string top, const std::string bottom, const std::string front, const std::string back, const TEXTURE_IMAGE_2D_INTERNAL_FORMAT internalformat, const TEXTURE_IMAGE_2D_FORMAT format, const TEXTURE_IMAGE_2D_TYPE type)
 	{
 		GLuint textureID;
 		glGenTextures(1, &textureID);
-		glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
+		faglBindTexture(BIND_TEXTURE_TARGET::TEXTURE_CUBE_MAP, textureID);
 
 		int rWidth, lWidth, tWidth, bWidth, fWidth, baWidth;
 		int rHeight, lHeight, tHeight, bHeight, fHeight, baHeight;
@@ -117,27 +198,27 @@ namespace fagl {
 		unsigned char* baData = stbi_load(back.c_str(), &baWidth, &baHeight, &baChannels, 0);
 
 		if (rData)
-			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X, 0, internalformat, rWidth, rHeight, border, format, type, rData);
+			faglTexImage2D(TEXTURE_IMAGE_2D_TARGET::TEXTURE_CUBE_MAP_POSITIVE_X, 0, internalformat, rWidth, rHeight, format, type, rData);
 		else
 			cout << "Could not load right texture" << endl;
 		if (lData)
-			glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_X, 0, internalformat, lWidth, lHeight, border, format, type, lData);
+			faglTexImage2D(TEXTURE_IMAGE_2D_TARGET::TEXTURE_CUBE_MAP_NEGATIVE_X, 0, internalformat, lWidth, lHeight, format, type, lData);
 		else
 			cout << "Could not load left texture" << endl;
 		if (tData)
-			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Y, 0, internalformat, tWidth, tHeight, border, format, type, tData);
+			faglTexImage2D(TEXTURE_IMAGE_2D_TARGET::TEXTURE_CUBE_MAP_POSITIVE_Y, 0, internalformat, tWidth, tHeight, format, type, tData);
 		else
 			cout << "Could not load top texture" << endl;
 		if (bData)
-			glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, 0, internalformat, bWidth, bHeight, border, format, type, bData);
+			faglTexImage2D(TEXTURE_IMAGE_2D_TARGET::TEXTURE_CUBE_MAP_NEGATIVE_Y, 0, internalformat, bWidth, bHeight, format, type, bData);
 		else
 			cout << "Could not load bottom texture" << endl;
 		if (fData)
-			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Z, 0, internalformat, fWidth, fHeight, border, format, type, fData);
+			faglTexImage2D(TEXTURE_IMAGE_2D_TARGET::TEXTURE_CUBE_MAP_POSITIVE_Z, 0, internalformat, fWidth, fHeight, format, type, fData);
 		else
 			cout << "Could not load front texture" << endl;
 		if (baData)
-			glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, 0, internalformat, baWidth, baHeight, border, format, type, baData);
+			faglTexImage2D(TEXTURE_IMAGE_2D_TARGET::TEXTURE_CUBE_MAP_NEGATIVE_Z, 0, internalformat, baWidth, baHeight, format, type, baData);
 		else
 			cout << "Could not load right texture" << endl;
 
@@ -150,38 +231,38 @@ namespace fagl {
 
 		glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
 
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+		faglTexParameteri(TEXTURE_PARAMETER_TARGET::TEXTURE_CUBE_MAP, TEXTURE_PARAMETER_NAME::TEXTURE_MIN_FILTER, GL_LINEAR);
+		faglTexParameteri(TEXTURE_PARAMETER_TARGET::TEXTURE_CUBE_MAP, TEXTURE_PARAMETER_NAME::TEXTURE_MAG_FILTER, GL_LINEAR);
+		faglTexParameteri(TEXTURE_PARAMETER_TARGET::TEXTURE_CUBE_MAP, TEXTURE_PARAMETER_NAME::TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		faglTexParameteri(TEXTURE_PARAMETER_TARGET::TEXTURE_CUBE_MAP, TEXTURE_PARAMETER_NAME::TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+		faglTexParameteri(TEXTURE_PARAMETER_TARGET::TEXTURE_CUBE_MAP, TEXTURE_PARAMETER_NAME::TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 
 		return textureID;
 	}
 
-	GLuint CreateCubeMap(const std::vector<std::string> paths, const GLint internalformat, const GLint border, const GLenum format, const GLenum type)
+	GLuint CreateCubeMap(const std::vector<std::string> paths, const TEXTURE_IMAGE_2D_INTERNAL_FORMAT internalformat, const TEXTURE_IMAGE_2D_FORMAT format, const TEXTURE_IMAGE_2D_TYPE type)
 	{
-		return CreateCubeMap(paths[0], paths[1], paths[2], paths[3], paths[4], paths[5], internalformat, border, format, type);
+		return CreateCubeMap(paths[0], paths[1], paths[2], paths[3], paths[4], paths[5], internalformat, format, type);
 	}
 
-	GLuint CreateTexture(const std::string path, const GLint internalformat, const GLint border, const GLenum format, const GLenum type)
+	GLuint CreateTexture(const std::string path, const TEXTURE_IMAGE_2D_INTERNAL_FORMAT internalformat, const TEXTURE_IMAGE_2D_FORMAT format, const TEXTURE_IMAGE_2D_TYPE type)
 	{
 		GLuint texture;
 		glGenTextures(1, &texture);
-		glBindTexture(GL_TEXTURE_2D, texture);
+		faglBindTexture(BIND_TEXTURE_TARGET::TEXTURE_2D, texture);
 
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		faglTexParameteri(TEXTURE_PARAMETER_TARGET::TEXTURE_2D, TEXTURE_PARAMETER_NAME::TEXTURE_WRAP_S, GL_REPEAT);
+		faglTexParameteri(TEXTURE_PARAMETER_TARGET::TEXTURE_2D, TEXTURE_PARAMETER_NAME::TEXTURE_WRAP_T, GL_REPEAT);
+		faglTexParameteri(TEXTURE_PARAMETER_TARGET::TEXTURE_2D, TEXTURE_PARAMETER_NAME::TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+		faglTexParameteri(TEXTURE_PARAMETER_TARGET::TEXTURE_2D, TEXTURE_PARAMETER_NAME::TEXTURE_MAG_FILTER, GL_LINEAR);
 
-		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+		faglPixelStorei(PIXEL_STORE_NAME::UNPACK_ALIGNMENT, 1);
 
 		int width, height, nrChannels;
 		unsigned char* data = stbi_load(path.c_str(), &width, &height, &nrChannels, 0);
 		if (data)
 		{
-			glTexImage2D(GL_TEXTURE_2D, 0, internalformat, width, height, border, format, type, data);
+			faglTexImage2D(TEXTURE_IMAGE_2D_TARGET::TEXTURE_2D, 0, internalformat, width, height, format, type, data);
 			glGenerateMipmap(GL_TEXTURE_2D);
 		}
 		else
@@ -192,15 +273,15 @@ namespace fagl {
 		return texture;
 	}
 
-	void CreatePlainFrameBuffer(GLuint* framebuffer, GLuint* texture, const GLint internalformat, const GLsizei width, const GLsizei height, const GLint border, const GLenum format, const GLenum type)
+	void CreatePlainFrameBuffer(GLuint* framebuffer, GLuint* texture, const TEXTURE_IMAGE_2D_INTERNAL_FORMAT internalformat, const GLsizei width, const GLsizei height, const TEXTURE_IMAGE_2D_FORMAT format, const TEXTURE_IMAGE_2D_TYPE type)
 	{
 		glGenFramebuffers(1, framebuffer);
 
 		glGenTextures(1, texture);
-		glBindTexture(GL_TEXTURE_2D, *texture);
-		glTexImage2D(GL_TEXTURE_2D, 0, internalformat, width, height, border, format, type, NULL);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		faglBindTexture(BIND_TEXTURE_TARGET::TEXTURE_2D, *texture);
+		faglTexImage2D(TEXTURE_IMAGE_2D_TARGET::TEXTURE_2D, 0, internalformat, width, height, format, type, NULL);
+		faglTexParameteri(TEXTURE_PARAMETER_TARGET::TEXTURE_2D, TEXTURE_PARAMETER_NAME::TEXTURE_MIN_FILTER, GL_LINEAR);
+		faglTexParameteri(TEXTURE_PARAMETER_TARGET::TEXTURE_2D, TEXTURE_PARAMETER_NAME::TEXTURE_MAG_FILTER, GL_LINEAR);
 
 		GLuint renderbuffer;
 
@@ -216,26 +297,26 @@ namespace fagl {
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
 
-	void CreateCubeFrameBuffer(GLuint* framebuffer, GLuint* texture, const GLint internalformat, const GLsizei width, const GLsizei height, const GLint border, const GLenum format, const GLenum type)
+	void CreateCubeFrameBuffer(GLuint* framebuffer, GLuint* texture, const TEXTURE_IMAGE_2D_INTERNAL_FORMAT internalformat, const GLsizei width, const GLsizei height, const TEXTURE_IMAGE_2D_FORMAT format, const TEXTURE_IMAGE_2D_TYPE type)
 	{
 		glGenFramebuffers(1, framebuffer);
 		glBindFramebuffer(GL_FRAMEBUFFER, *framebuffer);
 
 		glGenTextures(1, texture);
-		glBindTexture(GL_TEXTURE_CUBE_MAP, *texture);
+		faglBindTexture(BIND_TEXTURE_TARGET::TEXTURE_CUBE_MAP, *texture);
 
-		glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X, 0, internalformat, width, height, border, format, type, NULL);
-		glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_X, 0, internalformat, width, height, border, format, type, NULL);
-		glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Y, 0, internalformat, width, height, border, format, type, NULL);
-		glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, 0, internalformat, width, height, border, format, type, NULL);
-		glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Z, 0, internalformat, width, height, border, format, type, NULL);
-		glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, 0, internalformat, width, height, border, format, type, NULL);
+		faglTexImage2D(TEXTURE_IMAGE_2D_TARGET::TEXTURE_CUBE_MAP_POSITIVE_X, 0, internalformat, width, height, format, type, NULL);
+		faglTexImage2D(TEXTURE_IMAGE_2D_TARGET::TEXTURE_CUBE_MAP_NEGATIVE_X, 0, internalformat, width, height, format, type, NULL);
+		faglTexImage2D(TEXTURE_IMAGE_2D_TARGET::TEXTURE_CUBE_MAP_POSITIVE_Y, 0, internalformat, width, height, format, type, NULL);
+		faglTexImage2D(TEXTURE_IMAGE_2D_TARGET::TEXTURE_CUBE_MAP_NEGATIVE_Y, 0, internalformat, width, height, format, type, NULL);
+		faglTexImage2D(TEXTURE_IMAGE_2D_TARGET::TEXTURE_CUBE_MAP_POSITIVE_Z, 0, internalformat, width, height, format, type, NULL);
+		faglTexImage2D(TEXTURE_IMAGE_2D_TARGET::TEXTURE_CUBE_MAP_NEGATIVE_Z, 0, internalformat, width, height, format, type, NULL);
 
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+		faglTexParameteri(TEXTURE_PARAMETER_TARGET::TEXTURE_CUBE_MAP, TEXTURE_PARAMETER_NAME::TEXTURE_MIN_FILTER, GL_LINEAR);
+		faglTexParameteri(TEXTURE_PARAMETER_TARGET::TEXTURE_CUBE_MAP, TEXTURE_PARAMETER_NAME::TEXTURE_MAG_FILTER, GL_LINEAR);
+		faglTexParameteri(TEXTURE_PARAMETER_TARGET::TEXTURE_CUBE_MAP, TEXTURE_PARAMETER_NAME::TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		faglTexParameteri(TEXTURE_PARAMETER_TARGET::TEXTURE_CUBE_MAP, TEXTURE_PARAMETER_NAME::TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+		faglTexParameteri(TEXTURE_PARAMETER_TARGET::TEXTURE_CUBE_MAP, TEXTURE_PARAMETER_NAME::TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X, *texture, 0);
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_CUBE_MAP_NEGATIVE_X, *texture, 0);
@@ -252,7 +333,6 @@ namespace fagl {
 		glBindRenderbuffer(GL_RENDERBUFFER, 0);
 
 		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, renderbuffer);
-
 
 		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 			std::cout << "Framebuffer not complete!" << std::endl;
