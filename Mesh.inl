@@ -1,4 +1,5 @@
 #include <sstream>
+#include "Mesh.h"
 
 namespace fagl {
 	using std::vector;
@@ -220,25 +221,24 @@ namespace fagl {
 		cout << "Creating arrays" << endl;
 		GLuint VAO;
 		GLuint VBO;
-		glGenVertexArrays(1, &VAO);
-		glGenBuffers(1, &VBO);
-		glBindVertexArray(VAO);
-		glBindBuffer(GL_ARRAY_BUFFER, VBO);
-		glBufferData(GL_ARRAY_BUFFER, attributeElementCount * amount * sizeof(GLfloat), vertex_data, GL_STATIC_DRAW);
+		faglGenVertexArray(&VAO);
+		faglGenBuffer(&VBO);
+		faglBindVertexArray(VAO);
+		faglBindBuffer(BIND_BUFFER_TARGET::ARRAY_BUFFER, VBO);
+		faglBufferData(BIND_BUFFER_TARGET::ARRAY_BUFFER, attributeElementCount * amount * sizeof(GLfloat), vertex_data, BUFFER_DATA_USAGE::STATIC_DRAW);
 
 		cout << "Setting attributes" << endl;
 
 		unsigned int count = 0;
 		for (unsigned int i = 0; i < attributes.size(); i++) {
 			unsigned int size = AttributeElementCount(attributes[i]);
-			glEnableVertexAttribArray(i);
-			glVertexAttribPointer(i, size, GL_FLOAT, GL_FALSE, attributeElementCount * sizeof(float), (void*)(count * sizeof(float)));
+			faglVertexAttribPointerC(i, size, VERTEX_ATTRIB_POINTER_TYPE::FLOAT, BOOLEAN::FALSE, attributeElementCount * sizeof(float), (void*)(count * sizeof(float)));
 			count += size;
 		}
 
 		cout << "Finished VAO creation" << endl;
 
-		glBindVertexArray(0);
+		faglUnbindVertexArray();
 		delete[] vertex_data;
 		return VAO;
 	}
@@ -277,20 +277,19 @@ namespace fagl {
 		cout << "Creating arrays" << endl;
 		GLuint VAO;
 		GLuint VBO;
-		glGenVertexArrays(1, &VAO);
-		glGenBuffers(1, &VBO);
-		glBindVertexArray(VAO);
-		glBindBuffer(GL_ARRAY_BUFFER, VBO);
-		glBufferData(GL_ARRAY_BUFFER, attributeElementCount * amount * sizeof(GLfloat), vertex_data, GL_STATIC_DRAW);
+		faglGenVertexArray(&VAO);
+		faglGenBuffer(&VBO);
+		faglBindVertexArray(VAO);
+		faglBindBuffer(BIND_BUFFER_TARGET::ARRAY_BUFFER, VBO);
+		faglBufferData(BIND_BUFFER_TARGET::ARRAY_BUFFER, attributeElementCount * amount * sizeof(GLfloat), vertex_data, BUFFER_DATA_USAGE::STATIC_DRAW);
 
 		cout << "Setting attributes" << endl;
 
-		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, attributeElementCount, GL_FLOAT, GL_FALSE, attributeElementCount * sizeof(float), (void*)(0 * sizeof(float)));
+		faglVertexAttribPointerC(0, attributeElementCount, VERTEX_ATTRIB_POINTER_TYPE::FLOAT, BOOLEAN::FALSE, attributeElementCount * sizeof(float), (void*)(0 * sizeof(float)));
 
 		cout << "Finished VAO creation" << endl;
 
-		glBindVertexArray(0);
+		faglUnbindVertexArray();
 		delete[] vertex_data;
 		return VAO;
 	}
@@ -347,22 +346,20 @@ namespace fagl {
 		cout << "Creating arrays" << endl;
 		GLuint VAO;
 		GLuint VBO;
-		glGenVertexArrays(1, &VAO);
-		glGenBuffers(1, &VBO);
-		glBindVertexArray(VAO);
-		glBindBuffer(GL_ARRAY_BUFFER, VBO);
-		glBufferData(GL_ARRAY_BUFFER, attributeElementCount * amount * sizeof(GLfloat), vertex_data, GL_STATIC_DRAW);
+		faglGenVertexArray(&VAO);
+		faglGenBuffer(&VBO);
+		faglBindVertexArray(VAO);
+		faglBindBuffer(BIND_BUFFER_TARGET::ARRAY_BUFFER, VBO);
+		faglBufferData(BIND_BUFFER_TARGET::ARRAY_BUFFER, attributeElementCount * amount * sizeof(GLfloat), vertex_data, BUFFER_DATA_USAGE::STATIC_DRAW);
 
 		cout << "Setting attributes" << endl;
 
-		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, size1, GL_FLOAT, GL_FALSE, attributeElementCount * sizeof(float), (void*)(0 * sizeof(float)));
-		glEnableVertexAttribArray(1);
-		glVertexAttribPointer(1, size2, GL_FLOAT, GL_FALSE, attributeElementCount * sizeof(float), (void*)(size1 * sizeof(float)));
+		faglVertexAttribPointerC(0, size1, VERTEX_ATTRIB_POINTER_TYPE::FLOAT, BOOLEAN::FALSE, attributeElementCount * sizeof(float), (void*)(0 * sizeof(float)));
+		faglVertexAttribPointerC(1, size2, VERTEX_ATTRIB_POINTER_TYPE::FLOAT, BOOLEAN::FALSE, attributeElementCount * sizeof(float), (void*)(size1 * sizeof(float)));
 
 		cout << "Finished VAO creation" << endl;
 
-		glBindVertexArray(0);
+		faglUnbindVertexArray();
 		delete[] vertex_data;
 		return VAO;
 	}
@@ -435,24 +432,21 @@ namespace fagl {
 		cout << "Creating arrays" << endl;
 		GLuint VAO;
 		GLuint VBO;
-		glGenVertexArrays(1, &VAO);
-		glGenBuffers(1, &VBO);
-		glBindVertexArray(VAO);
-		glBindBuffer(GL_ARRAY_BUFFER, VBO);
-		glBufferData(GL_ARRAY_BUFFER, attributeElementCount * amount * sizeof(GLfloat), vertex_data, GL_STATIC_DRAW);
+		faglGenVertexArray(&VAO);
+		faglGenBuffer(&VBO);
+		faglBindVertexArray(VAO);
+		faglBindBuffer(BIND_BUFFER_TARGET::ARRAY_BUFFER, VBO);
+		faglBufferData(BIND_BUFFER_TARGET::ARRAY_BUFFER, attributeElementCount * amount * sizeof(GLfloat), vertex_data, BUFFER_DATA_USAGE::STATIC_DRAW);
 
 		cout << "Setting attributes" << endl;
 
-		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, size1, GL_FLOAT, GL_FALSE, attributeElementCount * sizeof(float), (void*)(0 * sizeof(float)));
-		glEnableVertexAttribArray(1);
-		glVertexAttribPointer(1, size2, GL_FLOAT, GL_FALSE, attributeElementCount * sizeof(float), (void*)(size1 * sizeof(float)));
-		glEnableVertexAttribArray(2);
-		glVertexAttribPointer(2, size3, GL_FLOAT, GL_FALSE, attributeElementCount * sizeof(float), (void*)((size1 + size2) * sizeof(float)));
+		faglVertexAttribPointerC(0, size1, VERTEX_ATTRIB_POINTER_TYPE::FLOAT, BOOLEAN::FALSE, attributeElementCount * sizeof(float), (void*)(0 * sizeof(float)));
+		faglVertexAttribPointerC(1, size2, VERTEX_ATTRIB_POINTER_TYPE::FLOAT, BOOLEAN::FALSE, attributeElementCount * sizeof(float), (void*)(size1 * sizeof(float)));
+		faglVertexAttribPointerC(2, size3, VERTEX_ATTRIB_POINTER_TYPE::FLOAT, BOOLEAN::FALSE, attributeElementCount * sizeof(float), (void*)((size1 + size2) * sizeof(float)));
 
 		cout << "Finished VAO creation" << endl;
 
-		glBindVertexArray(0);
+		faglUnbindVertexArray();
 		delete[] vertex_data;
 		return VAO;
 	}

@@ -7,51 +7,6 @@ namespace fagl {
 	using std::vector;
 	using std::string;
 
-	void faglEnable(ENABLE_CAPABILITY cap)
-	{
-		glEnable((GLenum)cap);
-	}
-
-	void faglDisable(ENABLE_CAPABILITY cap)
-	{
-		glDisable((GLenum)cap);
-	}
-
-	void faglEnablei(ENABLE_CAPABILITY cap, GLuint index)
-	{
-		glEnablei((GLenum)cap, index);
-	}
-
-	void faglDisablei(ENABLE_CAPABILITY cap, GLuint index)
-	{
-		glDisablei((GLenum)cap, index);
-	}
-
-	GLboolean faglIsEnabled(ENABLE_CAPABILITY cap)
-	{
-		return glIsEnabled((GLenum)cap);
-	}
-
-	GLboolean faglIsEnabledi(ENABLE_CAPABILITY cap, GLuint index)
-	{
-		return glIsEnabledi((GLenum)cap, index);
-	}
-
-	void faglGenBuffers(GLsizei n, GLuint* buffers)
-	{
-		glGenBuffers(n, buffers);
-	}
-
-	void faglGenBuffer(GLuint* buffer)
-	{
-		glGenBuffers(1, buffer);
-	}
-
-	void faglBindBuffer(BIND_BUFFER_TARGET target, GLuint buffer)
-	{
-		glBindBuffer((GLenum)target, buffer);
-	}
-
 	vec3 GetColor(const COLOR c) {
 		switch (c)
 		{

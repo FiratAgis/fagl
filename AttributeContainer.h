@@ -1,7 +1,7 @@
 #ifndef FAGL_ATTRIBUTE_CONTAINER_H
 #define FAGL_ATTRIBUTE_CONTAINER_H
 
-#include "CommonInclude.h"
+#include "FAGL.h"
 #include "BasicTypes.h"
 
 namespace fagl {

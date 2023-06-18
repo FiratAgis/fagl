@@ -1,63 +1,9 @@
 #ifndef FAGL_TEXTURE_H
 #define FAGL_TEXTURE_H
 
-#include "CommonInclude.h"
+#include "FAGL.h"
 
 namespace fagl {
-
-	void faglGenTextures(GLsizei n, GLuint* textures);
-
-	void faglGenTexture(GLuint* texture);
-
-	void faglGenFramebuffers(GLsizei n, GLuint* ids);
-
-	void faglGenFramebuffer(GLuint* id);
-
-	void faglBindFramebuffer(BIND_FRAMEBUFFER_TARGET target, GLuint framebuffer);
-
-	void faglBindFramebuffer(GLuint framebuffer);
-
-	void faglUnbindFramebuffer();
-
-	void faglGenRenderbuffers(GLsizei n, GLuint* renderbuffers);
-
-	void faglGenRenderbuffer(GLuint* renderbuffer);
-
-	void faglBindRenderbuffer(GLuint renderbuffer);
-
-	void faglUnbindRenderbuffer();
-
-	void faglTexImage2D(TEXTURE_IMAGE_2D_TARGET target, GLint level, TEXTURE_IMAGE_2D_INTERNAL_FORMAT internalformat, GLsizei width, GLsizei height, TEXTURE_IMAGE_2D_FORMAT format, TEXTURE_IMAGE_2D_TYPE type, const void* data);
-
-	void faglBindTexture(BIND_TEXTURE_TARGET target, GLuint texture);
-
-	void faglTexParameterf(TEXTURE_PARAMETER_TARGET target, TEXTURE_PARAMETER_NAME pname, GLfloat param);
-
-	void faglTexParameteri(TEXTURE_PARAMETER_TARGET target, TEXTURE_PARAMETER_NAME pname, GLint param);
-
-	void faglTextureParameterf(GLuint texture, TEXTURE_PARAMETER_NAME pname, GLfloat param);
-
-	void faglTextureParameteri(GLuint texture, TEXTURE_PARAMETER_NAME pname, GLint param);
-
-	void faglTexParameterfv(TEXTURE_PARAMETER_TARGET target, TEXTURE_PARAMETER_NAME pname, const GLfloat* params);
-
-	void faglTexParameteriv(TEXTURE_PARAMETER_TARGET target, TEXTURE_PARAMETER_NAME pname, const GLint* params);
-
-	void faglTexParameterIiv(TEXTURE_PARAMETER_TARGET target, TEXTURE_PARAMETER_NAME pname, const GLint* params);
-
-	void faglTexParameterIuiv(TEXTURE_PARAMETER_TARGET target, TEXTURE_PARAMETER_NAME pname, const GLuint* params);
-
-	void faglTextureParameterfv(GLuint texture, TEXTURE_PARAMETER_NAME pname, const GLfloat* params);
-
-	void faglTextureParameteriv(GLuint texture, TEXTURE_PARAMETER_NAME pname, const GLint* params);
-
-	void faglTextureParameterIiv(GLuint texture, TEXTURE_PARAMETER_NAME pname, const GLint* params);
-
-	void faglTextureParameterIuiv(GLuint texture, TEXTURE_PARAMETER_NAME pname, const GLuint* params);
-
-	void faglPixelStoref(PIXEL_STORE_NAME pname, GLfloat param);
-
-	void faglPixelStorei(PIXEL_STORE_NAME pname, GLint param);
 
 	/// <summary>
 	/// Creates a cubemap texture with given images.

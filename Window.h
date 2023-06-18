@@ -1,7 +1,7 @@
 #ifndef FAGL_WINDOW_H
 #define FAGL_WINDOW_H
 
-#include "CommonInclude.h"
+#include "FAGL.h"
 
 namespace fagl {
 	/// <summary>

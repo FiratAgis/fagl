@@ -1,7 +1,7 @@
 #ifndef FAGL_KEYBOARD_H
 #define FAGL_KEYBOARD_H
 
-#include "CommonInclude.h"
+#include "FAGL.h"
 
 namespace fagl {
 	bool* key_held_down;

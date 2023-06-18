@@ -8,141 +8,6 @@ namespace fagl {
 	using std::cout;
 	using std::endl;
 
-	void faglGenTextures(GLsizei n, GLuint* textures)
-	{
-		glGenTextures(n, textures);
-	}
-
-	void faglGenTexture(GLuint* texture)
-	{
-		glGenTextures(1, texture);
-	}
-
-	void faglGenFramebuffers(GLsizei n, GLuint* ids)
-	{
-		glGenFramebuffers(n, ids);
-	}
-
-	void faglGenFramebuffer(GLuint* id)
-	{
-		glGenFramebuffers(1, id);
-	}
-
-	void faglBindFramebuffer(BIND_FRAMEBUFFER_TARGET target, GLuint framebuffer)
-	{
-		glBindFramebuffer((GLenum)target, framebuffer);
-	}
-
-	void faglBindFramebuffer(GLuint framebuffer)
-	{
-		glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
-	}
-
-	void faglUnbindFramebuffer()
-	{
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	}
-
-	void faglGenRenderbuffers(GLsizei n, GLuint* renderbuffers)
-	{
-		glGenRenderbuffers(n, renderbuffers);
-	}
-
-	void faglGenRenderbuffer(GLuint* renderbuffer)
-	{
-		glGenRenderbuffers(1, renderbuffer);
-	}
-
-	void faglBindRenderbuffer(GLuint renderbuffer)
-	{
-		glBindRenderbuffer(GL_RENDERBUFFER, renderbuffer);
-	}
-
-	void faglUnbindRenderbuffer()
-	{
-		glBindRenderbuffer(GL_RENDERBUFFER, 0);
-	}
-
-	void faglTexImage2D(TEXTURE_IMAGE_2D_TARGET target, GLint level, TEXTURE_IMAGE_2D_INTERNAL_FORMAT internalformat, GLsizei width, GLsizei height, TEXTURE_IMAGE_2D_FORMAT format, TEXTURE_IMAGE_2D_TYPE type, const void* data)
-	{
-		glTexImage2D((GLenum)target, level, (GLint)internalformat, width, height, 0, (GLenum)format, (GLenum)type, data);
-	}
-
-	void faglBindTexture(BIND_TEXTURE_TARGET target, GLuint texture)
-	{
-		glBindTexture((GLenum)target, texture);
-	}
-
-	void faglTexParameterf(TEXTURE_PARAMETER_TARGET target, TEXTURE_PARAMETER_NAME pname, GLfloat param)
-	{
-		glTexParameterf((GLenum)target, (GLenum)pname, param);
-	}
-
-	void faglTexParameteri(TEXTURE_PARAMETER_TARGET target, TEXTURE_PARAMETER_NAME pname, GLint param)
-	{
-		glTexParameteri((GLenum)target, (GLenum)pname, param);
-	}
-
-	void faglTextureParameterf(GLuint texture, TEXTURE_PARAMETER_NAME pname, GLfloat param)
-	{
-		glTextureParameterf(texture, (GLenum)pname, param);
-	}
-
-	void faglTextureParameteri(GLuint texture, TEXTURE_PARAMETER_NAME pname, GLint param)
-	{
-		glTextureParameteri(texture, (GLenum)pname, param);
-	}
-
-	void faglTexParameterfv(TEXTURE_PARAMETER_TARGET target, TEXTURE_PARAMETER_NAME pname, const GLfloat* params)
-	{
-		glTexParameterfv((GLenum)target, (GLenum)pname, params);
-	}
-
-	void faglTexParameteriv(TEXTURE_PARAMETER_TARGET target, TEXTURE_PARAMETER_NAME pname, const GLint* params)
-	{
-		glTexParameteriv((GLenum)target, (GLenum)pname, params);
-	}
-
-	void faglTexParameterIiv(TEXTURE_PARAMETER_TARGET target, TEXTURE_PARAMETER_NAME pname, const GLint* params)
-	{
-		glTexParameterIiv((GLenum)target, (GLenum)pname, params);
-	}
-
-	void faglTexParameterIuiv(TEXTURE_PARAMETER_TARGET target, TEXTURE_PARAMETER_NAME pname, const GLuint* params)
-	{
-		glTexParameterIuiv((GLenum)target, (GLenum)pname, params);
-	}
-
-	void faglTextureParameterfv(GLuint texture, TEXTURE_PARAMETER_NAME pname, const GLfloat* params)
-	{
-		glTextureParameterfv(texture, (GLenum)pname, params);
-	}
-
-	void faglTextureParameteriv(GLuint texture, TEXTURE_PARAMETER_NAME pname, const GLint* params)
-	{
-		glTextureParameteriv(texture, (GLenum)pname, params);
-	}
-
-	void faglTextureParameterIiv(GLuint texture, TEXTURE_PARAMETER_NAME pname, const GLint* params)
-	{
-		glTextureParameterIiv(texture, (GLenum)pname, params);
-	}
-
-	void faglTextureParameterIuiv(GLuint texture, TEXTURE_PARAMETER_NAME pname, const GLuint* params)
-	{
-		glTextureParameterIuiv(texture, (GLenum)pname, params);
-	}
-
-	void faglPixelStoref(PIXEL_STORE_NAME pname, GLfloat param)
-	{
-		glPixelStoref((GLenum)pname, param);
-	}
-
-	void faglPixelStorei(PIXEL_STORE_NAME pname, GLint param)
-	{
-		glPixelStorei((GLenum)pname, param);
-	}
-
 	GLuint CreateCubeMap(const string right, const string left, const string top, const string bottom, const string front, const string back)
 	{
 		GLuint textureID;
@@ -225,7 +90,7 @@ namespace fagl {
 		if (data)
 		{
 			faglTexImage2D(TEXTURE_IMAGE_2D_TARGET::TEXTURE_2D, 0, TEXTURE_IMAGE_2D_INTERNAL_FORMAT::RGB, width, height, TEXTURE_IMAGE_2D_FORMAT::RGB, TEXTURE_IMAGE_2D_TYPE::UNSIGNED_BYTE, data);
-			glGenerateMipmap(GL_TEXTURE_2D);
+			faglGenerateMipmap(MIPMAP_TARGET::TEXTURE_2D);
 		}
 		else
 		{
@@ -318,7 +183,7 @@ namespace fagl {
 		if (data)
 		{
 			faglTexImage2D(TEXTURE_IMAGE_2D_TARGET::TEXTURE_2D, 0, internalformat, width, height, format, type, data);
-			glGenerateMipmap(GL_TEXTURE_2D);
+			faglGenerateMipmap(MIPMAP_TARGET::TEXTURE_2D);
 		}
 		else
 		{

@@ -1,7 +1,7 @@
 #ifndef FAGL_ROTATION_H
 #define FAGL_ROTATION_H
 
-#include "CommonInclude.h"
+#include "FAGL.h"
 #include <glm/gtc/quaternion.hpp>
 #include <glm/gtx/quaternion.hpp>
 #include "BasicTypes.h"
