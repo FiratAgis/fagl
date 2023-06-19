@@ -476,4 +476,6 @@ namespace fagl {
 
 	void faglUniformMatrix4x3fv(FAGLuniform location, const GLfloat* value);
 }
+
+#include "FAGL.inl"
 #endif
