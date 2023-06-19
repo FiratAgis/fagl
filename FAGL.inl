@@ -111,9 +111,49 @@ namespace fagl {
 		glBindRenderbuffer(GL_RENDERBUFFER, 0);
 	}
 
-	void faglTexImage2D(TEXTURE_IMAGE_2D_TARGET target, GLint level, TEXTURE_IMAGE_2D_INTERNAL_FORMAT internalformat, GLsizei width, GLsizei height, TEXTURE_IMAGE_2D_FORMAT format, TEXTURE_IMAGE_2D_TYPE type, const void* data)
+	void faglTexImage3D(TEXTURE_IMAGE_3D_TARGET target, GLint level, TEXTURE_IMAGE_INTERNAL_FORMAT internalformat, GLsizei width, GLsizei height, GLsizei depth, TEXTURE_IMAGE_FORMAT format, TEXTURE_IMAGE_TYPE type, const void* data)
+	{
+		glTexImage3D((GLenum)target, level, (GLint)internalformat, width, height, depth, 0, (GLenum)format, (GLenum)type, data);
+	}
+
+	void faglTexImage2D(TEXTURE_IMAGE_2D_TARGET target, GLint level, TEXTURE_IMAGE_INTERNAL_FORMAT internalformat, GLsizei width, GLsizei height, TEXTURE_IMAGE_FORMAT format, TEXTURE_IMAGE_TYPE type, const void* data)
 	{
 		glTexImage2D((GLenum)target, level, (GLint)internalformat, width, height, 0, (GLenum)format, (GLenum)type, data);
+	}
+
+	void faglTexImage1D(TEXTURE_IMAGE_1D_TARGET target, GLint level, TEXTURE_IMAGE_INTERNAL_FORMAT internalformat, GLsizei width, TEXTURE_IMAGE_FORMAT format, TEXTURE_IMAGE_TYPE type, const void* data)
+	{
+		glTexImage1D((GLenum)target, level, (GLint)internalformat, width, 0, (GLenum)format, (GLenum)type, data);
+	}
+
+	void faglTexSubImage3D(TEXTURE_SUB_3D_TARGET target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, TEXTURE_IMAGE_FORMAT format, TEXTURE_IMAGE_TYPE type, const void* pixels)
+	{
+		glTexSubImage3D((GLenum)target, level, xoffset, yoffset, zoffset, width, height, depth, (GLenum)format, (GLenum)type, pixels);
+	}
+
+	void faglTextureSubImage3D(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, TEXTURE_IMAGE_FORMAT format, TEXTURE_IMAGE_TYPE type, const void* pixels)
+	{
+		glTextureSubImage3D(texture, level, xoffset, yoffset, zoffset, width, height, depth, (GLenum)format, (GLenum)type, pixels);
+	}
+
+	void faglTexSubImage2D(TEXTURE_SUB_2D_TARGET target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, TEXTURE_IMAGE_FORMAT format, TEXTURE_IMAGE_TYPE type, const void* pixels)
+	{
+		glTexSubImage2D((GLenum)target, level, xoffset, yoffset, width, height, (GLenum)format, (GLenum)type, pixels);
+	}
+
+	void faglTextureSubImage2D(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, TEXTURE_IMAGE_FORMAT format, TEXTURE_IMAGE_TYPE type, const void* pixels)
+	{
+		glTextureSubImage2D(texture, level, xoffset, yoffset, width, height, (GLenum)format, (GLenum)type, pixels);
+	}
+
+	void faglTexSubImage1D(GLint level, GLint xoffset, GLsizei width, TEXTURE_IMAGE_FORMAT format, TEXTURE_IMAGE_TYPE type, const void* pixels)
+	{
+		glTexSubImage1D(GL_TEXTURE_1D, level, xoffset, width, (GLenum)format, (GLenum)type, pixels);
+	}
+
+	void faglTextureSubImage1D(GLuint texture, GLint level, GLint xoffset, GLsizei width, TEXTURE_IMAGE_FORMAT format, TEXTURE_IMAGE_TYPE type, const void* pixels)
+	{
+		glTextureSubImage1D(texture, level, xoffset, width, (GLenum)format, (GLenum)type, pixels);
 	}
 
 	void faglBindTexture(BIND_TEXTURE_TARGET target, GLuint texture)
@@ -345,6 +385,28 @@ namespace fagl {
 	void faglDrawElements(DRAW_MODE mode, GLsizei count, DRAW_TYPE type, const void* indices)
 	{
 		glDrawElements((GLenum)mode, count, (GLenum)type, indices);
+	}
+	void faglAttachShader(GLuint program, GLuint shader)
+	{
+		glAttachShader(program, shader);
+	}
+	void faglAttachShader(GLuint program, GLuint count, GLuint* shaders)
+	{
+		for(GLuint i = 0; i < count; i++)
+			glAttachShader(program, shaders[i]);
+	}
+	void faglAttachShader(GLuint program, std::vector<GLuint> shaders)
+	{
+		for(GLuint shader : shaders)
+			glAttachShader(program, shader);
+	}
+	void faglReadBuffer(READ_BUFFER_MODE mode)
+	{
+		glReadBuffer((GLenum)mode);
+	}
+	void faglNamedFramebufferReadBuffer(GLuint framebuffer, READ_BUFFER_MODE mode)
+	{
+		glNamedFramebufferReadBuffer(framebuffer, (GLenum)mode);
 	}
 }
 

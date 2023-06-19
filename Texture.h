@@ -44,7 +44,7 @@ namespace fagl {
 	/// <param name="format"> Format of the texture.</param>
 	/// <param name="type"> Type of the texture.</param>
 	/// <returns> Pointer to the created texture.</returns>
-	GLuint CreateCubeMap(const std::string right, const std::string left, const std::string top, const std::string bottom, const std::string front, const std::string back, const TEXTURE_IMAGE_2D_INTERNAL_FORMAT internalformat, const TEXTURE_IMAGE_2D_FORMAT format, const TEXTURE_IMAGE_2D_TYPE type);
+	GLuint CreateCubeMap(const std::string right, const std::string left, const std::string top, const std::string bottom, const std::string front, const std::string back, const TEXTURE_IMAGE_INTERNAL_FORMAT internalformat, const TEXTURE_IMAGE_FORMAT format, const TEXTURE_IMAGE_TYPE type);
 	
 	/// <summary>
 	/// Creates a cubemap texture with given images and parameters.
@@ -54,7 +54,7 @@ namespace fagl {
 	/// <param name="format"> Format of the texture.</param>
 	/// <param name="type"> Type of the texture.</param>
 	/// <returns> Pointer to the created texture.</returns>
-	GLuint CreateCubeMap(const std::vector<std::string> paths, const TEXTURE_IMAGE_2D_INTERNAL_FORMAT internalformat, const TEXTURE_IMAGE_2D_FORMAT format, const TEXTURE_IMAGE_2D_TYPE type);
+	GLuint CreateCubeMap(const std::vector<std::string> paths, const TEXTURE_IMAGE_INTERNAL_FORMAT internalformat, const TEXTURE_IMAGE_FORMAT format, const TEXTURE_IMAGE_TYPE type);
 
 	/// <summary>
 	/// Creates a 2d image texture with given image.
@@ -64,7 +64,7 @@ namespace fagl {
 	/// <param name="format"> Format of the texture.</param>
 	/// <param name="type"> Type of the texture.</param>
 	/// <returns> Pointer to the created texture.</returns>
-	GLuint CreateTexture(const std::string path, TEXTURE_IMAGE_2D_INTERNAL_FORMAT internalformat, TEXTURE_IMAGE_2D_FORMAT format, TEXTURE_IMAGE_2D_TYPE type);
+	GLuint CreateTexture(const std::string path, TEXTURE_IMAGE_INTERNAL_FORMAT internalformat, TEXTURE_IMAGE_FORMAT format, TEXTURE_IMAGE_TYPE type);
 
 	/// <summary>
 	/// Creates a frame buffer and associated 2d texture to be written and read.
@@ -76,7 +76,7 @@ namespace fagl {
 	/// <param name="height"> Height of the texture and the frame buffer.</param>
 	/// <param name="format"> Format of the texture.</param>
 	/// <param name="type"> Type of the texture.</param>
-	void CreatePlainFrameBuffer(GLuint *framebuffer, GLuint *texture, const TEXTURE_IMAGE_2D_INTERNAL_FORMAT internalformat, const GLsizei width, const GLsizei height, const TEXTURE_IMAGE_2D_FORMAT format, const TEXTURE_IMAGE_2D_TYPE type);
+	void CreatePlainFrameBuffer(GLuint *framebuffer, GLuint *texture, const TEXTURE_IMAGE_INTERNAL_FORMAT internalformat, const GLsizei width, const GLsizei height, const TEXTURE_IMAGE_FORMAT format, const TEXTURE_IMAGE_TYPE type);
 
 	/// <summary>
 	/// Creates a frame buffer and associated cubemap texture to be written and read.
@@ -88,7 +88,7 @@ namespace fagl {
 	/// <param name="height"> Height of the texture and the frame buffer.</param>
 	/// <param name="format"> Format of the texture.</param>
 	/// <param name="type"> Type of the texture.</param>
-	void CreateCubeFrameBuffer(GLuint *framebuffer, GLuint* texture, const TEXTURE_IMAGE_2D_INTERNAL_FORMAT internalformat, const GLsizei width, const GLsizei height, const TEXTURE_IMAGE_2D_FORMAT format, const TEXTURE_IMAGE_2D_TYPE type);
+	void CreateCubeFrameBuffer(GLuint *framebuffer, GLuint* texture, const TEXTURE_IMAGE_INTERNAL_FORMAT internalformat, const GLsizei width, const GLsizei height, const TEXTURE_IMAGE_FORMAT format, const TEXTURE_IMAGE_TYPE type);
 }
 
 #include "Texture.inl"
