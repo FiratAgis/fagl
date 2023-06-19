@@ -77,23 +77,23 @@ namespace fagl {
 		GLuint gProgram = glCreateProgram();
 		if (!vs.empty()) {
 			GLuint v = CreateShader(vs, CREATE_SHADER_TYPE::VERTEX_SHADER);
-			glAttachShader(gProgram, v);
+			faglAttachShader(gProgram, v);
 		}
 		if (!tcs.empty()) {
 			GLuint tc = CreateShader(tcs, CREATE_SHADER_TYPE::TESS_CONTROL_SHADER);
-			glAttachShader(gProgram, tc);
+			faglAttachShader(gProgram, tc);
 		}
 		if (!tes.empty()) {
 			GLuint te = CreateShader(tes, CREATE_SHADER_TYPE::TESS_EVALUATION_SHADER);
-			glAttachShader(gProgram, te);
+			faglAttachShader(gProgram, te);
 		}
 		if (!gs.empty()) {
 			GLuint g = CreateShader(gs, CREATE_SHADER_TYPE::GEOMETRY_SHADER);
-			glAttachShader(gProgram, g);
+			faglAttachShader(gProgram, g);
 		}
 		if (!fs.empty()) {
 			GLuint f = CreateShader(fs, CREATE_SHADER_TYPE::FRAGMENT_SHADER);
-			glAttachShader(gProgram, f);
+			faglAttachShader(gProgram, f);
 		}
 
 		glLinkProgram(gProgram);

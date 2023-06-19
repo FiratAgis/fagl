@@ -26,27 +26,27 @@ namespace fagl {
 		unsigned char* baData = stbi_load(back.c_str(), &baWidth, &baHeight, &baChannels, 0);
 
 		if (rData)
-			faglTexImage2D(TEXTURE_IMAGE_2D_TARGET::TEXTURE_CUBE_MAP_POSITIVE_X, 0, TEXTURE_IMAGE_2D_INTERNAL_FORMAT::RGB, rWidth, rHeight, TEXTURE_IMAGE_2D_FORMAT::RGB, TEXTURE_IMAGE_2D_TYPE::UNSIGNED_BYTE, rData);
+			faglTexImage2D(TEXTURE_IMAGE_2D_TARGET::TEXTURE_CUBE_MAP_POSITIVE_X, 0, TEXTURE_IMAGE_INTERNAL_FORMAT::RGB, rWidth, rHeight, TEXTURE_IMAGE_FORMAT::RGB, TEXTURE_IMAGE_TYPE::UNSIGNED_BYTE, rData);
 		else
 			cout << "Could not load right texture" << endl;
 		if (lData)
-			faglTexImage2D(TEXTURE_IMAGE_2D_TARGET::TEXTURE_CUBE_MAP_NEGATIVE_X, 0, TEXTURE_IMAGE_2D_INTERNAL_FORMAT::RGB, lWidth, lHeight, TEXTURE_IMAGE_2D_FORMAT::RGB, TEXTURE_IMAGE_2D_TYPE::UNSIGNED_BYTE, lData);
+			faglTexImage2D(TEXTURE_IMAGE_2D_TARGET::TEXTURE_CUBE_MAP_NEGATIVE_X, 0, TEXTURE_IMAGE_INTERNAL_FORMAT::RGB, lWidth, lHeight, TEXTURE_IMAGE_FORMAT::RGB, TEXTURE_IMAGE_TYPE::UNSIGNED_BYTE, lData);
 		else
 			cout << "Could not load left texture" << endl;
 		if (tData)
-			faglTexImage2D(TEXTURE_IMAGE_2D_TARGET::TEXTURE_CUBE_MAP_POSITIVE_Y, 0, TEXTURE_IMAGE_2D_INTERNAL_FORMAT::RGB, tWidth, tHeight, TEXTURE_IMAGE_2D_FORMAT::RGB, TEXTURE_IMAGE_2D_TYPE::UNSIGNED_BYTE, tData);
+			faglTexImage2D(TEXTURE_IMAGE_2D_TARGET::TEXTURE_CUBE_MAP_POSITIVE_Y, 0, TEXTURE_IMAGE_INTERNAL_FORMAT::RGB, tWidth, tHeight, TEXTURE_IMAGE_FORMAT::RGB, TEXTURE_IMAGE_TYPE::UNSIGNED_BYTE, tData);
 		else
 			cout << "Could not load top texture" << endl;
 		if (bData)
-			faglTexImage2D(TEXTURE_IMAGE_2D_TARGET::TEXTURE_CUBE_MAP_NEGATIVE_Y, 0, TEXTURE_IMAGE_2D_INTERNAL_FORMAT::RGB, bWidth, bHeight, TEXTURE_IMAGE_2D_FORMAT::RGB, TEXTURE_IMAGE_2D_TYPE::UNSIGNED_BYTE, bData);
+			faglTexImage2D(TEXTURE_IMAGE_2D_TARGET::TEXTURE_CUBE_MAP_NEGATIVE_Y, 0, TEXTURE_IMAGE_INTERNAL_FORMAT::RGB, bWidth, bHeight, TEXTURE_IMAGE_FORMAT::RGB, TEXTURE_IMAGE_TYPE::UNSIGNED_BYTE, bData);
 		else
 			cout << "Could not load bottom texture" << endl;
 		if (fData)
-			faglTexImage2D(TEXTURE_IMAGE_2D_TARGET::TEXTURE_CUBE_MAP_POSITIVE_Z, 0, TEXTURE_IMAGE_2D_INTERNAL_FORMAT::RGB, fWidth, fHeight, TEXTURE_IMAGE_2D_FORMAT::RGB, TEXTURE_IMAGE_2D_TYPE::UNSIGNED_BYTE, fData);
+			faglTexImage2D(TEXTURE_IMAGE_2D_TARGET::TEXTURE_CUBE_MAP_POSITIVE_Z, 0, TEXTURE_IMAGE_INTERNAL_FORMAT::RGB, fWidth, fHeight, TEXTURE_IMAGE_FORMAT::RGB, TEXTURE_IMAGE_TYPE::UNSIGNED_BYTE, fData);
 		else
 			cout << "Could not load front texture" << endl;
 		if (baData)
-			faglTexImage2D(TEXTURE_IMAGE_2D_TARGET::TEXTURE_CUBE_MAP_NEGATIVE_Z, 0, TEXTURE_IMAGE_2D_INTERNAL_FORMAT::RGB, baWidth, baHeight, TEXTURE_IMAGE_2D_FORMAT::RGB, TEXTURE_IMAGE_2D_TYPE::UNSIGNED_BYTE, baData);
+			faglTexImage2D(TEXTURE_IMAGE_2D_TARGET::TEXTURE_CUBE_MAP_NEGATIVE_Z, 0, TEXTURE_IMAGE_INTERNAL_FORMAT::RGB, baWidth, baHeight, TEXTURE_IMAGE_FORMAT::RGB, TEXTURE_IMAGE_TYPE::UNSIGNED_BYTE, baData);
 		else
 			cout << "Could not load right texture" << endl;
 
@@ -89,7 +89,7 @@ namespace fagl {
 		unsigned char* data = stbi_load(path.c_str(), &width, &height, &nrChannels, 0);
 		if (data)
 		{
-			faglTexImage2D(TEXTURE_IMAGE_2D_TARGET::TEXTURE_2D, 0, TEXTURE_IMAGE_2D_INTERNAL_FORMAT::RGB, width, height, TEXTURE_IMAGE_2D_FORMAT::RGB, TEXTURE_IMAGE_2D_TYPE::UNSIGNED_BYTE, data);
+			faglTexImage2D(TEXTURE_IMAGE_2D_TARGET::TEXTURE_2D, 0, TEXTURE_IMAGE_INTERNAL_FORMAT::RGB, width, height, TEXTURE_IMAGE_FORMAT::RGB, TEXTURE_IMAGE_TYPE::UNSIGNED_BYTE, data);
 			faglGenerateMipmap(MIPMAP_TARGET::TEXTURE_2D);
 		}
 		else
@@ -100,7 +100,7 @@ namespace fagl {
 		return texture;
 	}
 
-	GLuint CreateCubeMap(const std::string right, const std::string left, const std::string top, const std::string bottom, const std::string front, const std::string back, const TEXTURE_IMAGE_2D_INTERNAL_FORMAT internalformat, const TEXTURE_IMAGE_2D_FORMAT format, const TEXTURE_IMAGE_2D_TYPE type)
+	GLuint CreateCubeMap(const std::string right, const std::string left, const std::string top, const std::string bottom, const std::string front, const std::string back, const TEXTURE_IMAGE_INTERNAL_FORMAT internalformat, const TEXTURE_IMAGE_FORMAT format, const TEXTURE_IMAGE_TYPE type)
 	{
 		GLuint textureID;
 		faglGenTexture(&textureID);
@@ -160,12 +160,12 @@ namespace fagl {
 		return textureID;
 	}
 
-	GLuint CreateCubeMap(const std::vector<std::string> paths, const TEXTURE_IMAGE_2D_INTERNAL_FORMAT internalformat, const TEXTURE_IMAGE_2D_FORMAT format, const TEXTURE_IMAGE_2D_TYPE type)
+	GLuint CreateCubeMap(const std::vector<std::string> paths, const TEXTURE_IMAGE_INTERNAL_FORMAT internalformat, const TEXTURE_IMAGE_FORMAT format, const TEXTURE_IMAGE_TYPE type)
 	{
 		return CreateCubeMap(paths[0], paths[1], paths[2], paths[3], paths[4], paths[5], internalformat, format, type);
 	}
 
-	GLuint CreateTexture(const std::string path, const TEXTURE_IMAGE_2D_INTERNAL_FORMAT internalformat, const TEXTURE_IMAGE_2D_FORMAT format, const TEXTURE_IMAGE_2D_TYPE type)
+	GLuint CreateTexture(const std::string path, const TEXTURE_IMAGE_INTERNAL_FORMAT internalformat, const TEXTURE_IMAGE_FORMAT format, const TEXTURE_IMAGE_TYPE type)
 	{
 		GLuint texture;
 		faglGenTexture(&texture);
@@ -193,7 +193,7 @@ namespace fagl {
 		return texture;
 	}
 
-	void CreatePlainFrameBuffer(GLuint* framebuffer, GLuint* texture, const TEXTURE_IMAGE_2D_INTERNAL_FORMAT internalformat, const GLsizei width, const GLsizei height, const TEXTURE_IMAGE_2D_FORMAT format, const TEXTURE_IMAGE_2D_TYPE type)
+	void CreatePlainFrameBuffer(GLuint* framebuffer, GLuint* texture, const TEXTURE_IMAGE_INTERNAL_FORMAT internalformat, const GLsizei width, const GLsizei height, const TEXTURE_IMAGE_FORMAT format, const TEXTURE_IMAGE_TYPE type)
 	{
 		faglGenFramebuffer(framebuffer);
 
@@ -218,7 +218,7 @@ namespace fagl {
 		faglUnbindFramebuffer();
 	}
 
-	void CreateCubeFrameBuffer(GLuint* framebuffer, GLuint* texture, const TEXTURE_IMAGE_2D_INTERNAL_FORMAT internalformat, const GLsizei width, const GLsizei height, const TEXTURE_IMAGE_2D_FORMAT format, const TEXTURE_IMAGE_2D_TYPE type)
+	void CreateCubeFrameBuffer(GLuint* framebuffer, GLuint* texture, const TEXTURE_IMAGE_INTERNAL_FORMAT internalformat, const GLsizei width, const GLsizei height, const TEXTURE_IMAGE_FORMAT format, const TEXTURE_IMAGE_TYPE type)
 	{
 		faglGenFramebuffer(framebuffer);
 		faglBindFramebuffer(*framebuffer);
