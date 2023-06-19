@@ -45,7 +45,9 @@ namespace fagl {
 
 	void Mesh::CalculateRenderVertices()
 	{
+#ifdef _FAGL_PROGRESS_VERBOSE
 		cout << "Calculating Render Vertices" << endl;
+#endif
 		for (TempTriangle tri : temp_triangles) {
 			render_vertices.push_back(GenerateRenderVertex(tri.material_name, tri.vertex_ids.x, tri.normal_ids.x, tri.texture_ids.x));
 			render_vertices.push_back(GenerateRenderVertex(tri.material_name, tri.vertex_ids.y, tri.normal_ids.y, tri.texture_ids.y));
@@ -54,7 +56,9 @@ namespace fagl {
 	}
 
 	void Mesh::CalculateMissingNormals() {
+#ifdef _FAGL_PROGRESS_VERBOSE
 		cout << "Calculating normals" << endl;
+#endif
 		for (TempTriangle tri : temp_triangles) {
 			if (IsComplete(tri.vertex_ids) && !IsComplete(tri.normal_ids)) {
 				vec3 normal = GetSurfaceNormal(temp_vertices[tri.vertex_ids.x], temp_vertices[tri.vertex_ids.y], temp_vertices[tri.vertex_ids.z]);
@@ -74,9 +78,9 @@ namespace fagl {
 
 	Mesh::Mesh(const string& filename, const vec3 offset, const vec3 rotation, const vec3 scale)
 	{
-
+#ifdef _FAGL_PROGRESS_VERBOSE
 		cout << "Starting reading mesh: " << filename << endl;
-
+#endif
 		std::fstream myFile;
 
 		mat4 mat = glm::translate(mat4(1.0f), offset) * RotationMatrix(rotation) * glm::scale(mat4(1.0f), scale);
@@ -152,16 +156,18 @@ namespace fagl {
 			}
 		}
 		myFile.close();
+#ifdef _FAGL_PROGRESS_VERBOSE
 		cout << "Finished reading mesh: " << filename << endl;
-
+#endif
 		CalculateMissingNormals();
 		CalculateRenderVertices();
 		temp_vertices.clear();
 		temp_normals.clear();
 		temp_textures.clear();
 		temp_triangles.clear();
-
+#ifdef _FAGL_PROGRESS_VERBOSE
 		cout << "Finished mesh creation: " << filename << endl;
+#endif
 	}
 
 	Mesh::Mesh(const Mesh& mesh, const glm::vec3 offset, const glm::vec3 rotation, const glm::vec3 scale)
@@ -179,15 +185,17 @@ namespace fagl {
 
 	GLuint Mesh::GenerateVAO(vector<ATTRIBUTE_TYPE> attributes)
 	{
+#ifdef _FAGL_PROGRESS_VERBOSE
 		cout << "Starting VAO creation" << endl;
-
+#endif
 		const unsigned int attributeElementCount = AttributeElementCount(attributes);
 		const unsigned int amount = render_vertices.size();
 
 		GLfloat* vertex_data = new GLfloat[attributeElementCount * amount];
 
-
+#ifdef _FAGL_PROGRESS_VERBOSE
 		cout << "Processing render vertices" << endl;
+#endif
 
 		for (unsigned int i = 0; i < render_vertices.size(); i++) {
 			unsigned int count = 0;
@@ -217,43 +225,46 @@ namespace fagl {
 				index++;
 			}
 		}
+#ifdef _FAGL_PROGRESS_VERBOSE
 		cout << "Finished processing render vertices" << endl;
 		cout << "Creating arrays" << endl;
+#endif
 		GLuint VAO;
-		GLuint VBO;
+		FAGLbuffer VBO;
 		faglGenVertexArray(&VAO);
 		faglGenBuffer(&VBO);
 		faglBindVertexArray(VAO);
 		faglBindBuffer(BIND_BUFFER_TARGET::ARRAY_BUFFER, VBO);
 		faglBufferData(BIND_BUFFER_TARGET::ARRAY_BUFFER, attributeElementCount * amount * sizeof(GLfloat), vertex_data, BUFFER_DATA_USAGE::STATIC_DRAW);
-
+#ifdef _FAGL_PROGRESS_VERBOSE
 		cout << "Setting attributes" << endl;
-
+#endif
 		unsigned int count = 0;
 		for (unsigned int i = 0; i < attributes.size(); i++) {
 			unsigned int size = AttributeElementCount(attributes[i]);
 			faglVertexAttribPointerC(i, size, VERTEX_ATTRIB_POINTER_TYPE::FLOAT, BOOLEAN::FALSE, attributeElementCount * sizeof(float), (void*)(count * sizeof(float)));
 			count += size;
 		}
-
+#ifdef _FAGL_PROGRESS_VERBOSE
 		cout << "Finished VAO creation" << endl;
-
+#endif
 		faglUnbindVertexArray();
 		delete[] vertex_data;
 		return VAO;
 	}
-	GLuint Mesh::GenerateVAO(ATTRIBUTE_TYPE attrib1)
+	FAGLvertexarrar Mesh::GenerateVAO(ATTRIBUTE_TYPE attrib1)
 	{
+#ifdef _FAGL_PROGRESS_VERBOSE
 		cout << "Starting VAO creation" << endl;
-
+#endif
 		const unsigned int attributeElementCount = AttributeElementCount(attrib1);
 		const unsigned int amount = render_vertices.size();
 
 		GLfloat* vertex_data = new GLfloat[attributeElementCount * amount];
 
-
+#ifdef _FAGL_PROGRESS_VERBOSE
 		cout << "Processing render vertices" << endl;
-
+#endif
 		for (unsigned int i = 0; i < render_vertices.size(); i++) {
 
 			RenderVertex render_vert = render_vertices[i];
@@ -273,30 +284,33 @@ namespace fagl {
 				break;
 			}
 		}
+#ifdef _FAGL_PROGRESS_VERBOSE
 		cout << "Finished processing render vertices" << endl;
 		cout << "Creating arrays" << endl;
-		GLuint VAO;
-		GLuint VBO;
+#endif
+		FAGLvertexarrar VAO;
+		FAGLbuffer VBO;
 		faglGenVertexArray(&VAO);
 		faglGenBuffer(&VBO);
 		faglBindVertexArray(VAO);
 		faglBindBuffer(BIND_BUFFER_TARGET::ARRAY_BUFFER, VBO);
 		faglBufferData(BIND_BUFFER_TARGET::ARRAY_BUFFER, attributeElementCount * amount * sizeof(GLfloat), vertex_data, BUFFER_DATA_USAGE::STATIC_DRAW);
-
+#ifdef _FAGL_PROGRESS_VERBOSE
 		cout << "Setting attributes" << endl;
-
+#endif
 		faglVertexAttribPointerC(0, attributeElementCount, VERTEX_ATTRIB_POINTER_TYPE::FLOAT, BOOLEAN::FALSE, attributeElementCount * sizeof(float), (void*)(0 * sizeof(float)));
-
+#ifdef _FAGL_PROGRESS_VERBOSE
 		cout << "Finished VAO creation" << endl;
-
+#endif
 		faglUnbindVertexArray();
 		delete[] vertex_data;
 		return VAO;
 	}
-	GLuint Mesh::GenerateVAO(ATTRIBUTE_TYPE attrib1, ATTRIBUTE_TYPE attrib2)
+	FAGLvertexarrar Mesh::GenerateVAO(ATTRIBUTE_TYPE attrib1, ATTRIBUTE_TYPE attrib2)
 	{
+#ifdef _FAGL_PROGRESS_VERBOSE
 		cout << "Starting VAO creation" << endl;
-
+#endif
 		const unsigned int size1 = AttributeElementCount(attrib1);
 		const unsigned int size2 = AttributeElementCount(attrib2);
 		const unsigned int attributeElementCount = size1 + size2;
@@ -304,9 +318,9 @@ namespace fagl {
 
 		GLfloat* vertex_data = new GLfloat[attributeElementCount * amount];
 
-
+#ifdef _FAGL_PROGRESS_VERBOSE
 		cout << "Processing render vertices" << endl;
-
+#endif
 		for (unsigned int i = 0; i < render_vertices.size(); i++) {
 
 			RenderVertex render_vert = render_vertices[i];
@@ -342,31 +356,35 @@ namespace fagl {
 				break;
 			}
 		}
+#ifdef _FAGL_PROGRESS_VERBOSE
 		cout << "Finished processing render vertices" << endl;
 		cout << "Creating arrays" << endl;
-		GLuint VAO;
-		GLuint VBO;
+#endif
+		FAGLvertexarrar VAO;
+		FAGLbuffer VBO;
 		faglGenVertexArray(&VAO);
 		faglGenBuffer(&VBO);
 		faglBindVertexArray(VAO);
 		faglBindBuffer(BIND_BUFFER_TARGET::ARRAY_BUFFER, VBO);
 		faglBufferData(BIND_BUFFER_TARGET::ARRAY_BUFFER, attributeElementCount * amount * sizeof(GLfloat), vertex_data, BUFFER_DATA_USAGE::STATIC_DRAW);
-
+#ifdef _FAGL_PROGRESS_VERBOSE
 		cout << "Setting attributes" << endl;
-
+#endif
 		faglVertexAttribPointerC(0, size1, VERTEX_ATTRIB_POINTER_TYPE::FLOAT, BOOLEAN::FALSE, attributeElementCount * sizeof(float), (void*)(0 * sizeof(float)));
 		faglVertexAttribPointerC(1, size2, VERTEX_ATTRIB_POINTER_TYPE::FLOAT, BOOLEAN::FALSE, attributeElementCount * sizeof(float), (void*)(size1 * sizeof(float)));
-
+#ifdef _FAGL_PROGRESS_VERBOSE
 		cout << "Finished VAO creation" << endl;
+#endif
 
 		faglUnbindVertexArray();
 		delete[] vertex_data;
 		return VAO;
 	}
-	GLuint Mesh::GenerateVAO(ATTRIBUTE_TYPE attrib1, ATTRIBUTE_TYPE attrib2, ATTRIBUTE_TYPE attrib3)
+	FAGLvertexarrar Mesh::GenerateVAO(ATTRIBUTE_TYPE attrib1, ATTRIBUTE_TYPE attrib2, ATTRIBUTE_TYPE attrib3)
 	{
+#ifdef _FAGL_PROGRESS_VERBOSE
 		cout << "Starting VAO creation" << endl;
-
+#endif
 		const unsigned int size1 = AttributeElementCount(attrib1);
 		const unsigned int size2 = AttributeElementCount(attrib2);
 		const unsigned int size3 = AttributeElementCount(attrib3);
@@ -375,9 +393,9 @@ namespace fagl {
 
 		GLfloat* vertex_data = new GLfloat[attributeElementCount * amount];
 
-
+#ifdef _FAGL_PROGRESS_VERBOSE
 		cout << "Processing render vertices" << endl;
-
+#endif
 		for (unsigned int i = 0; i < render_vertices.size(); i++) {
 
 			RenderVertex render_vert = render_vertices[i];
@@ -428,23 +446,27 @@ namespace fagl {
 				break;
 			}
 		}
+#ifdef _FAGL_PROGRESS_VERBOSE
 		cout << "Finished processing render vertices" << endl;
 		cout << "Creating arrays" << endl;
-		GLuint VAO;
-		GLuint VBO;
+#endif
+		FAGLvertexarrar VAO;
+		FAGLbuffer VBO;
 		faglGenVertexArray(&VAO);
 		faglGenBuffer(&VBO);
 		faglBindVertexArray(VAO);
 		faglBindBuffer(BIND_BUFFER_TARGET::ARRAY_BUFFER, VBO);
 		faglBufferData(BIND_BUFFER_TARGET::ARRAY_BUFFER, attributeElementCount * amount * sizeof(GLfloat), vertex_data, BUFFER_DATA_USAGE::STATIC_DRAW);
-
+#ifdef _FAGL_PROGRESS_VERBOSE
 		cout << "Setting attributes" << endl;
+#endif
 
 		faglVertexAttribPointerC(0, size1, VERTEX_ATTRIB_POINTER_TYPE::FLOAT, BOOLEAN::FALSE, attributeElementCount * sizeof(float), (void*)(0 * sizeof(float)));
 		faglVertexAttribPointerC(1, size2, VERTEX_ATTRIB_POINTER_TYPE::FLOAT, BOOLEAN::FALSE, attributeElementCount * sizeof(float), (void*)(size1 * sizeof(float)));
 		faglVertexAttribPointerC(2, size3, VERTEX_ATTRIB_POINTER_TYPE::FLOAT, BOOLEAN::FALSE, attributeElementCount * sizeof(float), (void*)((size1 + size2) * sizeof(float)));
-
+#ifdef _FAGL_PROGRESS_VERBOSE
 		cout << "Finished VAO creation" << endl;
+#endif
 
 		faglUnbindVertexArray();
 		delete[] vertex_data;

@@ -40,14 +40,14 @@ namespace fagl {
 			/// </summary>
 			/// <param name="attributes"> Types of the attributes.</param>
 			/// <returns> Pointer to the VAO.</returns>
-			GLuint GenerateVAO(std::vector<ATTRIBUTE_TYPE> attributes);
+			FAGLvertexarrar GenerateVAO(std::vector<ATTRIBUTE_TYPE> attributes);
 
 			/// <summary>
 			/// Generates VAO from the given attribute.
 			/// </summary>
 			/// <param name="attrib1"> Type of the attribute.</param>
 			/// <returns> Pointer to the VAO.</returns>
-			GLuint GenerateVAO(ATTRIBUTE_TYPE attrib1);
+			FAGLvertexarrar GenerateVAO(ATTRIBUTE_TYPE attrib1);
 
 			/// <summary>
 			/// Generates VAO from the given attributes.
@@ -55,7 +55,7 @@ namespace fagl {
 			/// <param name="attrib1"> Type of the first attribute.</param>
 			/// <param name="attrib2"> Type of the second attribute.</param>
 			/// <returns>  Pointer to the VAO.</returns>
-			GLuint GenerateVAO(ATTRIBUTE_TYPE attrib1, ATTRIBUTE_TYPE attrib2);
+			FAGLvertexarrar GenerateVAO(ATTRIBUTE_TYPE attrib1, ATTRIBUTE_TYPE attrib2);
 
 			/// <summary>
 			/// Generates VAO from the given attributes.
@@ -64,7 +64,7 @@ namespace fagl {
 			/// <param name="attrib2"> Type of the second attribute.</param>
 			/// <param name="attrib3"> Type of the third attribute.</param>
 			/// <returns>  Pointer to the VAO.</returns>
-			GLuint GenerateVAO(ATTRIBUTE_TYPE attrib1, ATTRIBUTE_TYPE attrib2, ATTRIBUTE_TYPE attrib3);
+			FAGLvertexarrar GenerateVAO(ATTRIBUTE_TYPE attrib1, ATTRIBUTE_TYPE attrib2, ATTRIBUTE_TYPE attrib3);
 	};
 }
 

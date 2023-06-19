@@ -347,15 +347,15 @@ namespace fagl {
 		glGetInteger64i_v((GLenum)target, index, data);
 	}
 
-	void faglGenVertexArrays(GLsizei n, GLuint* arrays) {
+	void faglGenVertexArrays(GLsizei n, FAGLvertexarrar* arrays) {
 		glGenVertexArrays(n, arrays);
 	}
 
-	void faglGenVertexArray(GLuint* array) {
+	void faglGenVertexArray(FAGLvertexarrar* array) {
 		glGenVertexArrays(1, array);
 	}
 
-	void faglBindVertexArray(GLuint array) {
+	void faglBindVertexArray(FAGLvertexarrar array) {
 		glBindVertexArray(array);
 	}
 
@@ -730,6 +730,90 @@ namespace fagl {
 	void faglUniformMatrix4x3fv(FAGLuniform location, const GLfloat* value)
 	{
 		glUniformMatrix4x3fv(location, 1, GL_FALSE, value);
+	}
+	void faglDepthFunc(DEPTH_FUNC func)
+	{
+		glDepthFunc((GLenum)func);
+	}
+	void faglBlendFunc(BLEND_FUNC sfactor, BLEND_FUNC dfactor)
+	{
+		glBlendFunc((GLenum)sfactor, (GLenum)dfactor);
+	}
+	void faglBlendFunci(GLuint buf, BLEND_FUNC sfactor, BLEND_FUNC dfactor)
+	{
+		glBlendFunci(buf, (GLenum)sfactor, (GLenum)dfactor);
+	}
+	void faglFramebufferTexture(FRAMEBUFFER_TEXTURE_TARGET target, FRAMEBUFFER_TEXTURE_ATTACHMENT attachment, FAGLtexture texture, GLint level)
+	{
+		glFramebufferTexture((GLenum)target, (GLenum)attachment, texture, level);
+	}
+	void faglFramebufferTexture(FRAMEBUFFER_TEXTURE_TARGET target, FRAMEBUFFER_TEXTURE_ATTACHMENT attachment, FAGLtexture texture)
+	{
+		glFramebufferTexture((GLenum)target, (GLenum)attachment, texture, 0);
+	}
+	void faglFramebufferTexture(FRAMEBUFFER_TEXTURE_ATTACHMENT attachment, FAGLtexture texture, GLint level)
+	{
+		glFramebufferTexture(GL_FRAMEBUFFER, (GLenum)attachment, texture, level);
+	}
+	void faglFramebufferTexture(FRAMEBUFFER_TEXTURE_ATTACHMENT attachment, FAGLtexture texture)
+	{
+		glFramebufferTexture(GL_FRAMEBUFFER, (GLenum)attachment, texture, 0);
+	}
+	void faglFramebufferTexture1D(FRAMEBUFFER_TEXTURE_TARGET target, FRAMEBUFFER_TEXTURE_ATTACHMENT attachment, FAGLtexture texture, GLint level)
+	{
+		glFramebufferTexture1D((GLenum)target, (GLenum)attachment, GL_TEXTURE_1D, texture, level);
+	}
+	void faglFramebufferTexture1D(FRAMEBUFFER_TEXTURE_TARGET target, FRAMEBUFFER_TEXTURE_ATTACHMENT attachment, FAGLtexture texture)
+	{
+		glFramebufferTexture1D((GLenum)target, (GLenum)attachment, GL_TEXTURE_1D, texture, 0);
+	}
+	void faglFramebufferTexture1D(FRAMEBUFFER_TEXTURE_ATTACHMENT attachment, FAGLtexture texture, GLint level)
+	{
+		glFramebufferTexture1D(GL_FRAMEBUFFER, (GLenum)attachment, GL_TEXTURE_1D, texture, level);
+	}
+	void faglFramebufferTexture1D(FRAMEBUFFER_TEXTURE_ATTACHMENT attachment, FAGLtexture texture)
+	{
+		glFramebufferTexture1D(GL_FRAMEBUFFER, (GLenum)attachment, GL_TEXTURE_1D, texture, 0);
+	}
+	void faglFramebufferTexture2D(FRAMEBUFFER_TEXTURE_TARGET target, FRAMEBUFFER_TEXTURE_ATTACHMENT attachment, FRAMEBUFFER_TEXTURE_2D_TEXTURE_TARGET textarget, FAGLtexture texture, GLint level)
+	{
+		glFramebufferTexture2D((GLenum)target, (GLenum)attachment, (GLenum)textarget, texture, level);
+	}
+	void faglFramebufferTexture2D(FRAMEBUFFER_TEXTURE_TARGET target, FRAMEBUFFER_TEXTURE_ATTACHMENT attachment, FRAMEBUFFER_TEXTURE_2D_TEXTURE_TARGET textarget, FAGLtexture texture)
+	{
+		glFramebufferTexture2D((GLenum)target, (GLenum)attachment, (GLenum)textarget, texture, 0);
+	}
+	void faglFramebufferTexture2D(FRAMEBUFFER_TEXTURE_ATTACHMENT attachment, FRAMEBUFFER_TEXTURE_2D_TEXTURE_TARGET textarget, FAGLtexture texture, GLint level)
+	{
+		glFramebufferTexture2D(GL_FRAMEBUFFER, (GLenum)attachment, (GLenum)textarget, texture, level);
+	}
+	void faglFramebufferTexture2D(FRAMEBUFFER_TEXTURE_ATTACHMENT attachment, FRAMEBUFFER_TEXTURE_2D_TEXTURE_TARGET textarget, FAGLtexture texture)
+	{
+		glFramebufferTexture2D(GL_FRAMEBUFFER, (GLenum)attachment, (GLenum)textarget, texture, 0);
+	}
+	void faglFramebufferTexture3D(FRAMEBUFFER_TEXTURE_TARGET target, FRAMEBUFFER_TEXTURE_ATTACHMENT attachment, FAGLtexture texture, GLint level, GLint layer)
+	{
+		glFramebufferTexture3D((GLenum)target, (GLenum)attachment, GL_TEXTURE_3D, texture, level, layer);
+	}
+	void faglFramebufferTexture3D(FRAMEBUFFER_TEXTURE_TARGET target, FRAMEBUFFER_TEXTURE_ATTACHMENT attachment, FAGLtexture texture, GLint layer)
+	{
+		glFramebufferTexture3D((GLenum)target, (GLenum)attachment, GL_TEXTURE_3D, texture, 0, layer);
+	}
+	void faglFramebufferTexture3D(FRAMEBUFFER_TEXTURE_ATTACHMENT attachment, FAGLtexture texture, GLint level, GLint layer)
+	{
+		glFramebufferTexture3D(GL_FRAMEBUFFER, (GLenum)attachment, GL_TEXTURE_3D, texture, level, layer);
+	}
+	void faglFramebufferTexture3D(FRAMEBUFFER_TEXTURE_ATTACHMENT attachment, FAGLtexture texture, GLint layer)
+	{
+		glFramebufferTexture3D(GL_FRAMEBUFFER, (GLenum)attachment, GL_TEXTURE_3D, texture, 0, layer);
+	}
+	void faglNamedFramebufferTexture(FAGLframebuffer framebuffer, FRAMEBUFFER_TEXTURE_ATTACHMENT attachment, FAGLtexture texture, GLint level)
+	{
+		glNamedFramebufferTexture(framebuffer, (GLenum)attachment, texture, level);
+	}
+	void faglNamedFramebufferTexture(FAGLframebuffer framebuffer, FRAMEBUFFER_TEXTURE_ATTACHMENT attachment, FAGLtexture texture)
+	{
+		glNamedFramebufferTexture(framebuffer, (GLenum)attachment, texture, 0);
 	}
 }
 

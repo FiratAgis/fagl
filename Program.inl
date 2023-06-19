@@ -49,6 +49,7 @@ namespace fagl {
 
 		char output[1024] = { 0 };
 		faglGetShaderInfoLog(s, 1024, &length, output);
+#ifdef _FAGL_PROGRESS_VERBOSE
 		switch (shaderType) {
 		case CREATE_SHADER_TYPE::VERTEX_SHADER:
 			printf("VS compile log: %s\n", output);
@@ -69,6 +70,7 @@ namespace fagl {
 			printf("Unknown compile log: %s\n", output);
 			break;
 		}
+#endif
 		return s;
 	}
 
