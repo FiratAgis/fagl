@@ -30,7 +30,7 @@ namespace fagl {
 		return true;
 	}
 
-	GLuint CreateShader(const string shaderName, CREATE_SHADER_TYPE shaderType)
+	FAGLshader CreateShader(const string shaderName, CREATE_SHADER_TYPE shaderType)
 	{
 		string shaderSource;
 
@@ -43,12 +43,12 @@ namespace fagl {
 		GLint length = shaderSource.length();
 		const GLchar* shader = (const GLchar*)shaderSource.c_str();
 
-		GLuint s = faglCreateShader(shaderType);
-		glShaderSource(s, 1, &shader, &length);
-		glCompileShader(s);
+		FAGLshader s = faglCreateShader(shaderType);
+		faglShaderSource(s, 1, &shader, &length);
+		faglCompileShader(s);
 
 		char output[1024] = { 0 };
-		glGetShaderInfoLog(s, 1024, &length, output);
+		faglGetShaderInfoLog(s, 1024, &length, output);
 		switch (shaderType) {
 		case CREATE_SHADER_TYPE::VERTEX_SHADER:
 			printf("VS compile log: %s\n", output);
@@ -72,31 +72,31 @@ namespace fagl {
 		return s;
 	}
 
-	GLuint CreateProgram(const string vs, const string tcs, const string tes, const string gs, const string fs)
+	FAGLprogram CreateProgram(const string vs, const string tcs, const string tes, const string gs, const string fs)
 	{
-		GLuint gProgram = glCreateProgram();
+		FAGLprogram gProgram = faglCreateProgram();
 		if (!vs.empty()) {
-			GLuint v = CreateShader(vs, CREATE_SHADER_TYPE::VERTEX_SHADER);
+			FAGLshader v = CreateShader(vs, CREATE_SHADER_TYPE::VERTEX_SHADER);
 			faglAttachShader(gProgram, v);
 		}
 		if (!tcs.empty()) {
-			GLuint tc = CreateShader(tcs, CREATE_SHADER_TYPE::TESS_CONTROL_SHADER);
+			FAGLshader tc = CreateShader(tcs, CREATE_SHADER_TYPE::TESS_CONTROL_SHADER);
 			faglAttachShader(gProgram, tc);
 		}
 		if (!tes.empty()) {
-			GLuint te = CreateShader(tes, CREATE_SHADER_TYPE::TESS_EVALUATION_SHADER);
+			FAGLshader te = CreateShader(tes, CREATE_SHADER_TYPE::TESS_EVALUATION_SHADER);
 			faglAttachShader(gProgram, te);
 		}
 		if (!gs.empty()) {
-			GLuint g = CreateShader(gs, CREATE_SHADER_TYPE::GEOMETRY_SHADER);
+			FAGLshader g = CreateShader(gs, CREATE_SHADER_TYPE::GEOMETRY_SHADER);
 			faglAttachShader(gProgram, g);
 		}
 		if (!fs.empty()) {
-			GLuint f = CreateShader(fs, CREATE_SHADER_TYPE::FRAGMENT_SHADER);
+			FAGLshader f = CreateShader(fs, CREATE_SHADER_TYPE::FRAGMENT_SHADER);
 			faglAttachShader(gProgram, f);
 		}
 
-		glLinkProgram(gProgram);
+		faglLinkProgram(gProgram);
 
 		GLint status;
 		glGetProgramiv(gProgram, GL_LINK_STATUS, &status);

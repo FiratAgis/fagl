@@ -31,17 +31,17 @@ namespace fagl {
 		return glIsEnabledi((GLenum)cap, index);
 	}
 
-	void faglGenBuffers(GLsizei n, GLuint* buffers)
+	void faglGenBuffers(GLsizei n, FAGLbuffer* buffers)
 	{
 		glGenBuffers(n, buffers);
 	}
 
-	void faglGenBuffer(GLuint* buffer)
+	void faglGenBuffer(FAGLbuffer* buffer)
 	{
 		glGenBuffers(1, buffer);
 	}
 
-	void faglBindBuffer(BIND_BUFFER_TARGET target, GLuint buffer)
+	void faglBindBuffer(BIND_BUFFER_TARGET target, FAGLbuffer buffer)
 	{
 		glBindBuffer((GLenum)target, buffer);
 	}
@@ -51,37 +51,37 @@ namespace fagl {
 		glBufferData((GLenum)target, size, data, (GLenum)usage);
 	}
 
-	void faglNamedBufferData(GLuint buffer, GLsizeiptr size, const void* data, BUFFER_DATA_USAGE usage)
+	void faglNamedBufferData(FAGLbuffer buffer, GLsizeiptr size, const void* data, BUFFER_DATA_USAGE usage)
 	{
 		glNamedBufferData(buffer, size, data, (GLenum)usage);
 	}
 
-	void faglGenTextures(GLsizei n, GLuint* textures)
+	void faglGenTextures(GLsizei n, FAGLtexture* textures)
 	{
 		glGenTextures(n, textures);
 	}
 
-	void faglGenTexture(GLuint* texture)
+	void faglGenTexture(FAGLtexture* texture)
 	{
 		glGenTextures(1, texture);
 	}
 
-	void faglGenFramebuffers(GLsizei n, GLuint* ids)
+	void faglGenFramebuffers(GLsizei n, FAGLframebuffer* ids)
 	{
 		glGenFramebuffers(n, ids);
 	}
 
-	void faglGenFramebuffer(GLuint* id)
+	void faglGenFramebuffer(FAGLframebuffer* id)
 	{
 		glGenFramebuffers(1, id);
 	}
 
-	void faglBindFramebuffer(BIND_FRAMEBUFFER_TARGET target, GLuint framebuffer)
+	void faglBindFramebuffer(BIND_FRAMEBUFFER_TARGET target, FAGLframebuffer framebuffer)
 	{
 		glBindFramebuffer((GLenum)target, framebuffer);
 	}
 
-	void faglBindFramebuffer(GLuint framebuffer)
+	void faglBindFramebuffer(FAGLframebuffer framebuffer)
 	{
 		glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
 	}
@@ -91,17 +91,17 @@ namespace fagl {
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
 
-	void faglGenRenderbuffers(GLsizei n, GLuint* renderbuffers)
+	void faglGenRenderbuffers(GLsizei n, FAGLrenderbuffer* renderbuffers)
 	{
 		glGenRenderbuffers(n, renderbuffers);
 	}
 
-	void faglGenRenderbuffer(GLuint* renderbuffer)
+	void faglGenRenderbuffer(FAGLrenderbuffer* renderbuffer)
 	{
 		glGenRenderbuffers(1, renderbuffer);
 	}
 
-	void faglBindRenderbuffer(GLuint renderbuffer)
+	void faglBindRenderbuffer(FAGLrenderbuffer renderbuffer)
 	{
 		glBindRenderbuffer(GL_RENDERBUFFER, renderbuffer);
 	}
@@ -131,7 +131,7 @@ namespace fagl {
 		glTexSubImage3D((GLenum)target, level, xoffset, yoffset, zoffset, width, height, depth, (GLenum)format, (GLenum)type, pixels);
 	}
 
-	void faglTextureSubImage3D(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, TEXTURE_IMAGE_FORMAT format, TEXTURE_IMAGE_TYPE type, const void* pixels)
+	void faglTextureSubImage3D(FAGLtexture texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, TEXTURE_IMAGE_FORMAT format, TEXTURE_IMAGE_TYPE type, const void* pixels)
 	{
 		glTextureSubImage3D(texture, level, xoffset, yoffset, zoffset, width, height, depth, (GLenum)format, (GLenum)type, pixels);
 	}
@@ -141,7 +141,7 @@ namespace fagl {
 		glTexSubImage2D((GLenum)target, level, xoffset, yoffset, width, height, (GLenum)format, (GLenum)type, pixels);
 	}
 
-	void faglTextureSubImage2D(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, TEXTURE_IMAGE_FORMAT format, TEXTURE_IMAGE_TYPE type, const void* pixels)
+	void faglTextureSubImage2D(FAGLtexture texture, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, TEXTURE_IMAGE_FORMAT format, TEXTURE_IMAGE_TYPE type, const void* pixels)
 	{
 		glTextureSubImage2D(texture, level, xoffset, yoffset, width, height, (GLenum)format, (GLenum)type, pixels);
 	}
@@ -151,12 +151,12 @@ namespace fagl {
 		glTexSubImage1D(GL_TEXTURE_1D, level, xoffset, width, (GLenum)format, (GLenum)type, pixels);
 	}
 
-	void faglTextureSubImage1D(GLuint texture, GLint level, GLint xoffset, GLsizei width, TEXTURE_IMAGE_FORMAT format, TEXTURE_IMAGE_TYPE type, const void* pixels)
+	void faglTextureSubImage1D(FAGLtexture texture, GLint level, GLint xoffset, GLsizei width, TEXTURE_IMAGE_FORMAT format, TEXTURE_IMAGE_TYPE type, const void* pixels)
 	{
 		glTextureSubImage1D(texture, level, xoffset, width, (GLenum)format, (GLenum)type, pixels);
 	}
 
-	void faglBindTexture(BIND_TEXTURE_TARGET target, GLuint texture)
+	void faglBindTexture(BIND_TEXTURE_TARGET target, FAGLtexture texture)
 	{
 		glBindTexture((GLenum)target, texture);
 	}
@@ -171,12 +171,12 @@ namespace fagl {
 		glTexParameteri((GLenum)target, (GLenum)pname, param);
 	}
 
-	void faglTextureParameterf(GLuint texture, TEXTURE_PARAMETER_NAME pname, GLfloat param)
+	void faglTextureParameterf(FAGLtexture texture, TEXTURE_PARAMETER_NAME pname, GLfloat param)
 	{
 		glTextureParameterf(texture, (GLenum)pname, param);
 	}
 
-	void faglTextureParameteri(GLuint texture, TEXTURE_PARAMETER_NAME pname, GLint param)
+	void faglTextureParameteri(FAGLtexture texture, TEXTURE_PARAMETER_NAME pname, GLint param)
 	{
 		glTextureParameteri(texture, (GLenum)pname, param);
 	}
@@ -201,22 +201,22 @@ namespace fagl {
 		glTexParameterIuiv((GLenum)target, (GLenum)pname, params);
 	}
 
-	void faglTextureParameterfv(GLuint texture, TEXTURE_PARAMETER_NAME pname, const GLfloat* params)
+	void faglTextureParameterfv(FAGLtexture texture, TEXTURE_PARAMETER_NAME pname, const GLfloat* params)
 	{
 		glTextureParameterfv(texture, (GLenum)pname, params);
 	}
 
-	void faglTextureParameteriv(GLuint texture, TEXTURE_PARAMETER_NAME pname, const GLint* params)
+	void faglTextureParameteriv(FAGLtexture texture, TEXTURE_PARAMETER_NAME pname, const GLint* params)
 	{
 		glTextureParameteriv(texture, (GLenum)pname, params);
 	}
 
-	void faglTextureParameterIiv(GLuint texture, TEXTURE_PARAMETER_NAME pname, const GLint* params)
+	void faglTextureParameterIiv(FAGLtexture texture, TEXTURE_PARAMETER_NAME pname, const GLint* params)
 	{
 		glTextureParameterIiv(texture, (GLenum)pname, params);
 	}
 
-	void faglTextureParameterIuiv(GLuint texture, TEXTURE_PARAMETER_NAME pname, const GLuint* params)
+	void faglTextureParameterIuiv(FAGLtexture texture, TEXTURE_PARAMETER_NAME pname, const GLuint* params)
 	{
 		glTextureParameterIuiv(texture, (GLenum)pname, params);
 	}
@@ -236,13 +236,37 @@ namespace fagl {
 		glGenerateMipmap((GLenum)target);
 	}
 
-	void faglGenerateTextureMipmap(GLuint texture)
+	void faglGenerateTextureMipmap(FAGLtexture texture)
 	{
 		glGenerateTextureMipmap(texture);
 	}
-	GLuint faglCreateShader(CREATE_SHADER_TYPE shaderType)
+	FAGLprogram faglCreateProgram()
 	{
-		glCreateShader((GLenum)shaderType);
+		return glCreateProgram();
+	}
+	void faglUseProgram(FAGLprogram program)
+	{
+		glUseProgram(program);
+	}
+	void faglLinkProgram(FAGLprogram program)
+	{
+		glLinkProgram(program);
+	}
+	FAGLshader faglCreateShader(CREATE_SHADER_TYPE shaderType)
+	{
+		return glCreateShader((GLenum)shaderType);
+	}
+	void faglShaderSource(FAGLshader shader, GLsizei count, const GLchar** string, const GLint* length)
+	{
+		glShaderSource(shader, count, string, length);
+	}
+	void faglCompileShader(FAGLshader shader)
+	{
+		glCompileShader(shader);
+	}
+	void faglGetShaderInfoLog(FAGLshader shader, GLsizei maxLength, GLsizei* length, GLchar* infoLog)
+	{
+		glGetShaderInfoLog(shader, maxLength, length, infoLog);
 	}
 	void faglReadPixels(GLint x, GLint y, GLsizei width, GLsizei height, READ_PIXEL_FORMAT format, READ_PIXEL_TYPE type, void* data)
 	{
@@ -261,16 +285,16 @@ namespace fagl {
 		glReadnPixels(0, 0, width, height, (GLenum)format, (GLenum)type, bufSize, data);
 	}
 
-	GLint faglGetUniformLocation(GLuint program, const GLchar* name)
+	FAGLuniform faglGetUniformLocation(FAGLprogram program, const GLchar* name)
 	{
-		glGetUniformLocation(program, name);
+		return glGetUniformLocation(program, name);
 	}
 
-	GLint faglGetUniformLocation(const GLchar* name)
+	FAGLuniform faglGetUniformLocation(const GLchar* name)
 	{
 		GLint program;
 		faglGetIntegerv(GET_NAME::CURRENT_PROGRAM, &program);
-		glGetUniformLocation(program, name);
+		return glGetUniformLocation(program, name);
 	}
 
 	void faglGetBooleanv(GET_NAME pname, GLboolean* data)
@@ -344,6 +368,11 @@ namespace fagl {
 		glVertexAttribPointer(index, size, (GLenum)type, (GLboolean)normalized, stride, pointer);
 	}
 
+	void faglVertexAttribPointer(GLuint index, GLint size, VERTEX_ATTRIB_POINTER_TYPE type, GLsizei stride, const void* pointer)
+	{
+		glVertexAttribPointer(index, size, (GLenum)type, GL_FALSE, stride, pointer);
+	}
+
 	void faglVertexAttribIPointer(GLuint index, GLint size, VERTEX_ATTRIB_POINTER_TYPE type, GLsizei stride, const void* pointer)
 	{
 		glVertexAttribIPointer(index, size, (GLenum)type, stride, pointer);
@@ -358,6 +387,12 @@ namespace fagl {
 	{
 		glEnableVertexAttribArray(index);
 		glVertexAttribPointer(index, size, (GLenum)type, (GLboolean)normalized, stride, pointer);
+	}
+
+	void faglVertexAttribPointerC(GLuint index, GLint size, VERTEX_ATTRIB_POINTER_TYPE type, GLsizei stride, const void* pointer)
+	{
+		glEnableVertexAttribArray(index);
+		glVertexAttribPointer(index, size, (GLenum)type, GL_FALSE, stride, pointer);
 	}
 
 	void faglVertexAttribIPointerC(GLuint index, GLint size, VERTEX_ATTRIB_POINTER_TYPE type, GLsizei stride, const void* pointer)
@@ -386,16 +421,16 @@ namespace fagl {
 	{
 		glDrawElements((GLenum)mode, count, (GLenum)type, indices);
 	}
-	void faglAttachShader(GLuint program, GLuint shader)
+	void faglAttachShader(FAGLprogram program, FAGLshader shader)
 	{
 		glAttachShader(program, shader);
 	}
-	void faglAttachShader(GLuint program, GLuint count, GLuint* shaders)
+	void faglAttachShader(FAGLprogram program, GLuint count, FAGLshader* shaders)
 	{
 		for(GLuint i = 0; i < count; i++)
 			glAttachShader(program, shaders[i]);
 	}
-	void faglAttachShader(GLuint program, std::vector<GLuint> shaders)
+	void faglAttachShader(FAGLprogram program, std::vector<FAGLshader> shaders)
 	{
 		for(GLuint shader : shaders)
 			glAttachShader(program, shader);
@@ -404,9 +439,297 @@ namespace fagl {
 	{
 		glReadBuffer((GLenum)mode);
 	}
-	void faglNamedFramebufferReadBuffer(GLuint framebuffer, READ_BUFFER_MODE mode)
+	void faglNamedFramebufferReadBuffer(FAGLframebuffer framebuffer, READ_BUFFER_MODE mode)
 	{
 		glNamedFramebufferReadBuffer(framebuffer, (GLenum)mode);
+	}
+	void faglUniform1f(FAGLuniform location, GLfloat v0)
+	{
+		glUniform1f(location, v0);
+	}
+	void faglUniform2f(FAGLuniform location, GLfloat v0, GLfloat v1)
+	{
+		glUniform2f(location, v0, v1);
+	}
+	void faglUniform3f(FAGLuniform location, GLfloat v0, GLfloat v1, GLfloat v2)
+	{
+		glUniform3f(location, v0, v1, v2);
+	}
+	void faglUniform4f(FAGLuniform location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3)
+	{
+		glUniform4f(location, v0, v1, v2, v3);
+	}
+	void faglUniform1i(FAGLuniform location, GLint v0)
+	{
+		glUniform1i(location, v0);
+	}
+	void faglUniform2i(FAGLuniform location, GLint v0, GLint v1)
+	{
+		glUniform2i(location, v0, v1);
+	}
+	void faglUniform3i(FAGLuniform location, GLint v0, GLint v1, GLint v2)
+	{
+		glUniform3i(location, v0, v1, v2);
+	}
+	void faglUniform4i(FAGLuniform location, GLint v0, GLint v1, GLint v2, GLint v3)
+	{
+		glUniform4i(location, v0, v1, v2, v3);
+	}
+	void faglUniform1ui(FAGLuniform location, GLuint v0)
+	{
+		glUniform1ui(location, v0);
+	}
+	void faglUniform2ui(FAGLuniform location, GLuint v0, GLuint v1)
+	{
+		glUniform2ui(location, v0, v1);
+	}
+	void faglUniform3ui(FAGLuniform location, GLuint v0, GLuint v1, GLuint v2)
+	{
+		glUniform3ui(location, v0, v1, v2);
+	}
+	void faglUniform4ui(FAGLuniform location, GLuint v0, GLuint v1, GLuint v2, GLuint v3)
+	{
+		glUniform4ui(location, v0, v1, v2, v3);
+	}
+	void faglUniform1fv(FAGLuniform location, GLsizei count, const GLfloat* value)
+	{
+		glUniform1fv(location, count, value);
+	}
+	void faglUniform1fv(FAGLuniform location, const GLfloat* value)
+	{
+		glUniform1fv(location, 1, value);
+	}
+	void faglUniform2fv(FAGLuniform location, GLsizei count, const GLfloat* value)
+	{
+		glUniform2fv(location, count, value);
+	}
+	void faglUniform2fv(FAGLuniform location, const GLfloat* value)
+	{
+		glUniform2fv(location, 1, value);
+	}
+	void faglUniform3fv(FAGLuniform location, GLsizei count, const GLfloat* value)
+	{
+		glUniform3fv(location, count, value);
+	}
+	void faglUniform3fv(FAGLuniform location, const GLfloat* value)
+	{
+		glUniform3fv(location, 1, value);
+	}
+	void faglUniform4fv(FAGLuniform location, GLsizei count, const GLfloat* value)
+	{
+		glUniform4fv(location, count, value);
+	}
+	void faglUniform4fv(FAGLuniform location, const GLfloat* value)
+	{
+		glUniform4fv(location, 1, value);
+	}
+	void faglUniform1iv(FAGLuniform location, GLsizei count, const GLint* value)
+	{
+		glUniform1iv(location, count, value);
+	}
+	void faglUniform1iv(FAGLuniform location, const GLint* value)
+	{
+		glUniform1iv(location, 1, value);
+	}
+	void faglUniform2iv(FAGLuniform location, GLsizei count, const GLint* value)
+	{
+		glUniform2iv(location, count, value);
+	}
+	void faglUniform2iv(FAGLuniform location, const GLint* value)
+	{
+		glUniform2iv(location, 1, value);
+	}
+	void faglUniform3iv(FAGLuniform location, GLsizei count, const GLint* value)
+	{
+		glUniform3iv(location, count, value);
+	}
+	void faglUniform3iv(FAGLuniform location, const GLint* value)
+	{
+		glUniform3iv(location, 1, value);
+	}
+	void faglUniform4iv(FAGLuniform location, GLsizei count, const GLint* value)
+	{
+		glUniform4iv(location, count, value);
+	}
+	void faglUniform4iv(FAGLuniform location, const GLint* value)
+	{
+		glUniform4iv(location, 1, value);
+	}
+	void faglUniform1uiv(FAGLuniform location, GLsizei count, const GLuint* value)
+	{
+		glUniform1uiv(location, count, value);
+	}
+	void faglUniform1uiv(FAGLuniform location, const GLuint* value)
+	{
+		glUniform1uiv(location, 1, value);
+	}
+	void faglUniform2uiv(FAGLuniform location, GLsizei count, const GLuint* value)
+	{
+		glUniform2uiv(location, count, value);
+	}
+	void faglUniform2uiv(FAGLuniform location, const GLuint* value)
+	{
+		glUniform2uiv(location, 1, value);
+	}
+	void faglUniform3uiv(FAGLuniform location, GLsizei count, const GLuint* value)
+	{
+		glUniform3uiv(location, count, value);
+	}
+	void faglUniform3uiv(FAGLuniform location, const GLuint* value)
+	{
+		glUniform3uiv(location, 1, value);
+	}
+	void faglUniform4uiv(FAGLuniform location, GLsizei count, const GLuint* value)
+	{
+		glUniform4uiv(location, count, value);
+	}
+	void faglUniform4uiv(FAGLuniform location, const GLuint* value)
+	{
+		glUniform4uiv(location, 1, value);
+	}
+	void faglUniformMatrix2fv(FAGLuniform location, GLsizei count, BOOLEAN transpose, const GLfloat* value)
+	{
+		glUniformMatrix2fv(location, count, (GLboolean)transpose, value);
+	}
+	void faglUniformMatrix2fv(FAGLuniform location, BOOLEAN transpose, const GLfloat* value)
+	{
+		glUniformMatrix2fv(location, 1, (GLboolean)transpose, value);
+	}
+	void faglUniformMatrix2fv(FAGLuniform location, GLsizei count, const GLfloat* value)
+	{
+		glUniformMatrix2fv(location, count, GL_FALSE, value);
+	}
+	void faglUniformMatrix2fv(FAGLuniform location, const GLfloat* value)
+	{
+		glUniformMatrix2fv(location, 1, GL_FALSE, value);
+	}
+	void faglUniformMatrix3fv(FAGLuniform location, GLsizei count, BOOLEAN transpose, const GLfloat* value)
+	{
+		glUniformMatrix3fv(location, count, (GLboolean)transpose, value);
+	}
+	void faglUniformMatrix3fv(FAGLuniform location, BOOLEAN transpose, const GLfloat* value)
+	{
+		glUniformMatrix3fv(location, 1, (GLboolean)transpose, value);
+	}
+	void faglUniformMatrix3fv(FAGLuniform location, GLsizei count, const GLfloat* value)
+	{
+		glUniformMatrix3fv(location, count, GL_FALSE, value);
+	}
+	void faglUniformMatrix3fv(FAGLuniform location, const GLfloat* value)
+	{
+		glUniformMatrix3fv(location, 1, GL_FALSE, value);
+	}
+	void faglUniformMatrix4fv(FAGLuniform location, GLsizei count, BOOLEAN transpose, const GLfloat* value)
+	{
+		glUniformMatrix4fv(location, count, (GLboolean)transpose, value);
+	}
+	void faglUniformMatrix4fv(FAGLuniform location, BOOLEAN transpose, const GLfloat* value)
+	{
+		glUniformMatrix4fv(location, 1, (GLboolean)transpose, value);
+	}
+	void faglUniformMatrix4fv(FAGLuniform location, GLsizei count, const GLfloat* value)
+	{
+		glUniformMatrix4fv(location, count, GL_FALSE, value);
+	}
+	void faglUniformMatrix4fv(FAGLuniform location, const GLfloat* value)
+	{
+		glUniformMatrix4fv(location, 1, GL_FALSE, value);
+	}
+	void faglUniformMatrix2x3fv(FAGLuniform location, GLsizei count, BOOLEAN transpose, const GLfloat* value)
+	{
+		glUniformMatrix2x3fv(location, count, (GLboolean)transpose, value);
+	}
+	void faglUniformMatrix2x3fv(FAGLuniform location, BOOLEAN transpose, const GLfloat* value)
+	{
+		glUniformMatrix2x3fv(location, 1, (GLboolean)transpose, value);
+	}
+	void faglUniformMatrix2x3fv(FAGLuniform location, GLsizei count, const GLfloat* value)
+	{
+		glUniformMatrix2x3fv(location, count, GL_FALSE, value);
+	}
+	void faglUniformMatrix2x3fv(FAGLuniform location, const GLfloat* value)
+	{
+		glUniformMatrix2x3fv(location, 1, GL_FALSE, value);
+	}
+	void faglUniformMatrix3x2fv(FAGLuniform location, GLsizei count, BOOLEAN transpose, const GLfloat* value)
+	{
+		glUniformMatrix3x2fv(location, count, (GLboolean)transpose, value);
+	}
+	void faglUniformMatrix3x2fv(FAGLuniform location, BOOLEAN transpose, const GLfloat* value)
+	{
+		glUniformMatrix3x2fv(location, 1, (GLboolean)transpose, value);
+	}
+	void faglUniformMatrix3x2fv(FAGLuniform location, GLsizei count, const GLfloat* value)
+	{
+		glUniformMatrix3x2fv(location, count, GL_FALSE, value);
+	}
+	void faglUniformMatrix3x2fv(FAGLuniform location, const GLfloat* value)
+	{
+		glUniformMatrix3x2fv(location, 1, GL_FALSE, value);
+	}
+	void faglUniformMatrix2x4fv(FAGLuniform location, GLsizei count, BOOLEAN transpose, const GLfloat* value)
+	{
+		glUniformMatrix2x4fv(location, count, (GLboolean)transpose, value);
+	}
+	void faglUniformMatrix2x4fv(FAGLuniform location, BOOLEAN transpose, const GLfloat* value)
+	{
+		glUniformMatrix2x4fv(location, 1, (GLboolean)transpose, value);
+	}
+	void faglUniformMatrix2x4fv(FAGLuniform location, GLsizei count, const GLfloat* value)
+	{
+		glUniformMatrix2x4fv(location, count, GL_FALSE, value);
+	}
+	void faglUniformMatrix2x4fv(FAGLuniform location, const GLfloat* value)
+	{
+		glUniformMatrix2x4fv(location, 1, GL_FALSE, value);
+	}
+	void faglUniformMatrix4x2fv(FAGLuniform location, GLsizei count, BOOLEAN transpose, const GLfloat* value)
+	{
+		glUniformMatrix4x2fv(location, count, (GLboolean)transpose, value);
+	}
+	void faglUniformMatrix4x2fv(FAGLuniform location, BOOLEAN transpose, const GLfloat* value)
+	{
+		glUniformMatrix4x2fv(location, 1, (GLboolean)transpose, value);
+	}
+	void faglUniformMatrix4x2fv(FAGLuniform location, GLsizei count, const GLfloat* value)
+	{
+		glUniformMatrix4x2fv(location, count, GL_FALSE, value);
+	}
+	void faglUniformMatrix4x2fv(FAGLuniform location, const GLfloat* value)
+	{
+		glUniformMatrix4x2fv(location, 1, GL_FALSE, value);
+	}
+	void faglUniformMatrix3x4fv(FAGLuniform location, GLsizei count, BOOLEAN transpose, const GLfloat* value)
+	{
+		glUniformMatrix3x4fv(location, count, (GLboolean)transpose, value);
+	}
+	void faglUniformMatrix3x4fv(FAGLuniform location, BOOLEAN transpose, const GLfloat* value)
+	{
+		glUniformMatrix3x4fv(location, 1, (GLboolean)transpose, value);
+	}
+	void faglUniformMatrix3x4fv(FAGLuniform location, GLsizei count, const GLfloat* value)
+	{
+		glUniformMatrix3x4fv(location, count, GL_FALSE, value);
+	}
+	void faglUniformMatrix3x4fv(FAGLuniform location, const GLfloat* value)
+	{
+		glUniformMatrix3x4fv(location, 1, GL_FALSE, value);
+	}
+	void faglUniformMatrix4x3fv(FAGLuniform location, GLsizei count, BOOLEAN transpose, const GLfloat* value)
+	{
+		glUniformMatrix4x3fv(location, count, (GLboolean)transpose, value);
+	}
+	void faglUniformMatrix4x3fv(FAGLuniform location, BOOLEAN transpose, const GLfloat* value)
+	{
+		glUniformMatrix4x3fv(location, 1, (GLboolean)transpose, value);
+	}
+	void faglUniformMatrix4x3fv(FAGLuniform location, GLsizei count, const GLfloat* value)
+	{
+		glUniformMatrix4x3fv(location, count, GL_FALSE, value);
+	}
+	void faglUniformMatrix4x3fv(FAGLuniform location, const GLfloat* value)
+	{
+		glUniformMatrix4x3fv(location, 1, GL_FALSE, value);
 	}
 }
 

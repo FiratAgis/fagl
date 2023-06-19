@@ -16,6 +16,14 @@
 
 namespace fagl {
 
+	typedef GLuint FAGLprogram;
+	typedef GLuint FAGLshader;
+	typedef GLint FAGLuniform;
+	typedef GLuint FAGLtexture;
+	typedef GLuint FAGLbuffer;
+	typedef GLuint FAGLframebuffer;
+	typedef GLuint FAGLrenderbuffer;
+
 	enum class COLOR {
 		WHITE, SILVER, GRAY, BLACK, RED, MAROON, YELLOW, OLIVE, LIME, GREEN, AQUA, TEAL, BLUE, NAVY, FUCHSIA, PURPLE
 	};
@@ -77,7 +85,7 @@ namespace fagl {
 	};
 
 	enum class READ_PIXEL_FORMAT : unsigned int {
-		STENCIL_INDEX = GL_STENCIL_INDEX, DEPTH_COMPONENT = GL_DEPTH_COMPONENT, DEPTH_STENCIL = GL_DEPTH_STENCIL, RED = GL_RED, GREEN = GL_GREEN, _BLUE = GL_BLUE, RGB = GL_RGB, BGR = GL_BGR, RGBA = GL_RGBA, BGRA = GL_BGRA
+		STENCIL_INDEX = GL_STENCIL_INDEX, DEPTH_COMPONENT = GL_DEPTH_COMPONENT, DEPTH_STENCIL = GL_DEPTH_STENCIL, RED = GL_RED, GREEN = GL_GREEN, BLUE = GL_BLUE, RGB = GL_RGB, BGR = GL_BGR, RGBA = GL_RGBA, BGRA = GL_BGRA
 	};
 
 	enum class READ_PIXEL_TYPE : unsigned int {
@@ -142,7 +150,6 @@ namespace fagl {
 		FRONT_LEFT = GL_FRONT_LEFT, FRONT_RIGHT = GL_FRONT_RIGHT, BACK_LEFT = GL_BACK_LEFT, BACK_RIGHT = GL_BACK_RIGHT, FRONT = GL_FRONT, BACK = GL_BACK, LEFT = GL_LEFT, RIGHT = GL_RIGHT, COLOR_ATTACHMENT0 = GL_COLOR_ATTACHMENT0, COLOR_ATTACHMENT1 = GL_COLOR_ATTACHMENT1, COLOR_ATTACHMENT2 = GL_COLOR_ATTACHMENT2, COLOR_ATTACHMENT3 = GL_COLOR_ATTACHMENT3, COLOR_ATTACHMENT4 = GL_COLOR_ATTACHMENT4, COLOR_ATTACHMENT5 = GL_COLOR_ATTACHMENT5, COLOR_ATTACHMENT6 = GL_COLOR_ATTACHMENT6, COLOR_ATTACHMENT7 = GL_COLOR_ATTACHMENT7, COLOR_ATTACHMENT8 = GL_COLOR_ATTACHMENT8, COLOR_ATTACHMENT9 = GL_COLOR_ATTACHMENT9, COLOR_ATTACHMENT10 = GL_COLOR_ATTACHMENT10, COLOR_ATTACHMENT11 = GL_COLOR_ATTACHMENT11, COLOR_ATTACHMENT12 = GL_COLOR_ATTACHMENT12, COLOR_ATTACHMENT13 = GL_COLOR_ATTACHMENT13, COLOR_ATTACHMENT14 = GL_COLOR_ATTACHMENT14, COLOR_ATTACHMENT15 = GL_COLOR_ATTACHMENT15
 	};
 
-
 	void faglEnable(ENABLE_CAPABILITY cap);
 
 	void faglDisable(ENABLE_CAPABILITY cap);
@@ -155,35 +162,35 @@ namespace fagl {
 
 	GLboolean faglIsEnabledi(ENABLE_CAPABILITY cap, GLuint index);
 
-	void faglGenBuffers(GLsizei n, GLuint* buffers);
+	void faglGenBuffers(GLsizei n, FAGLbuffer* buffers);
 
-	void faglGenBuffer(GLuint* buffer);
+	void faglGenBuffer(FAGLbuffer* buffer);
 
-	void faglBindBuffer(BIND_BUFFER_TARGET target, GLuint buffer);
+	void faglBindBuffer(BIND_BUFFER_TARGET target, FAGLbuffer buffer);
 
 	void faglBufferData(BIND_BUFFER_TARGET target, GLsizeiptr size, const void* data, BUFFER_DATA_USAGE usage);
 
-	void faglNamedBufferData(GLuint buffer, GLsizeiptr size, const void* data, BUFFER_DATA_USAGE usage);
+	void faglNamedBufferData(FAGLbuffer buffer, GLsizeiptr size, const void* data, BUFFER_DATA_USAGE usage);
 
-	void faglGenTextures(GLsizei n, GLuint* textures);
+	void faglGenTextures(GLsizei n, FAGLtexture* textures);
 
-	void faglGenTexture(GLuint* texture);
+	void faglGenTexture(FAGLtexture* texture);
 
-	void faglGenFramebuffers(GLsizei n, GLuint* ids);
+	void faglGenFramebuffers(GLsizei n, FAGLframebuffer* ids);
 
-	void faglGenFramebuffer(GLuint* id);
+	void faglGenFramebuffer(FAGLframebuffer* id);
 
-	void faglBindFramebuffer(BIND_FRAMEBUFFER_TARGET target, GLuint framebuffer);
+	void faglBindFramebuffer(BIND_FRAMEBUFFER_TARGET target, FAGLframebuffer framebuffer);
 
-	void faglBindFramebuffer(GLuint framebuffer);
+	void faglBindFramebuffer(FAGLframebuffer framebuffer);
 
 	void faglUnbindFramebuffer();
 
-	void faglGenRenderbuffers(GLsizei n, GLuint* renderbuffers);
+	void faglGenRenderbuffers(GLsizei n, FAGLrenderbuffer* renderbuffers);
 
-	void faglGenRenderbuffer(GLuint* renderbuffer);
+	void faglGenRenderbuffer(FAGLrenderbuffer* renderbuffer);
 
-	void faglBindRenderbuffer(GLuint renderbuffer);
+	void faglBindRenderbuffer(FAGLrenderbuffer renderbuffer);
 
 	void faglUnbindRenderbuffer();
 
@@ -195,25 +202,25 @@ namespace fagl {
 	
 	void faglTexSubImage3D(TEXTURE_SUB_3D_TARGET target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, TEXTURE_IMAGE_FORMAT format, TEXTURE_IMAGE_TYPE type, const void* pixels);
 
-	void faglTextureSubImage3D(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, TEXTURE_IMAGE_FORMAT format, TEXTURE_IMAGE_TYPE type, const void* pixels);
+	void faglTextureSubImage3D(FAGLtexture texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, TEXTURE_IMAGE_FORMAT format, TEXTURE_IMAGE_TYPE type, const void* pixels);
 
 	void faglTexSubImage2D(TEXTURE_SUB_2D_TARGET target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, TEXTURE_IMAGE_FORMAT format, TEXTURE_IMAGE_TYPE type, const void* pixels);
 
-	void faglTextureSubImage2D(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, TEXTURE_IMAGE_FORMAT format, TEXTURE_IMAGE_TYPE type, const void* pixels);
+	void faglTextureSubImage2D(FAGLtexture texture, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, TEXTURE_IMAGE_FORMAT format, TEXTURE_IMAGE_TYPE type, const void* pixels);
 
 	void faglTexSubImage1D(GLint level, GLint xoffset, GLsizei width, TEXTURE_IMAGE_FORMAT format, TEXTURE_IMAGE_TYPE type, const void* pixels);
 
-	void faglTextureSubImage1D(GLuint texture, GLint level, GLint xoffset, GLsizei width, TEXTURE_IMAGE_FORMAT format, TEXTURE_IMAGE_TYPE type, const void* pixels);
+	void faglTextureSubImage1D(FAGLtexture texture, GLint level, GLint xoffset, GLsizei width, TEXTURE_IMAGE_FORMAT format, TEXTURE_IMAGE_TYPE type, const void* pixels);
 	
-	void faglBindTexture(BIND_TEXTURE_TARGET target, GLuint texture);
+	void faglBindTexture(BIND_TEXTURE_TARGET target, FAGLtexture texture);
 
 	void faglTexParameterf(TEXTURE_PARAMETER_TARGET target, TEXTURE_PARAMETER_NAME pname, GLfloat param);
 
 	void faglTexParameteri(TEXTURE_PARAMETER_TARGET target, TEXTURE_PARAMETER_NAME pname, GLint param);
 
-	void faglTextureParameterf(GLuint texture, TEXTURE_PARAMETER_NAME pname, GLfloat param);
+	void faglTextureParameterf(FAGLtexture texture, TEXTURE_PARAMETER_NAME pname, GLfloat param);
 
-	void faglTextureParameteri(GLuint texture, TEXTURE_PARAMETER_NAME pname, GLint param);
+	void faglTextureParameteri(FAGLtexture texture, TEXTURE_PARAMETER_NAME pname, GLint param);
 
 	void faglTexParameterfv(TEXTURE_PARAMETER_TARGET target, TEXTURE_PARAMETER_NAME pname, const GLfloat* params);
 
@@ -223,13 +230,13 @@ namespace fagl {
 
 	void faglTexParameterIuiv(TEXTURE_PARAMETER_TARGET target, TEXTURE_PARAMETER_NAME pname, const GLuint* params);
 
-	void faglTextureParameterfv(GLuint texture, TEXTURE_PARAMETER_NAME pname, const GLfloat* params);
+	void faglTextureParameterfv(FAGLtexture texture, TEXTURE_PARAMETER_NAME pname, const GLfloat* params);
 
-	void faglTextureParameteriv(GLuint texture, TEXTURE_PARAMETER_NAME pname, const GLint* params);
+	void faglTextureParameteriv(FAGLtexture texture, TEXTURE_PARAMETER_NAME pname, const GLint* params);
 
-	void faglTextureParameterIiv(GLuint texture, TEXTURE_PARAMETER_NAME pname, const GLint* params);
+	void faglTextureParameterIiv(FAGLtexture texture, TEXTURE_PARAMETER_NAME pname, const GLint* params);
 
-	void faglTextureParameterIuiv(GLuint texture, TEXTURE_PARAMETER_NAME pname, const GLuint* params);
+	void faglTextureParameterIuiv(FAGLtexture texture, TEXTURE_PARAMETER_NAME pname, const GLuint* params);
 
 	void faglPixelStoref(PIXEL_STORE_NAME pname, GLfloat param);
 
@@ -237,9 +244,21 @@ namespace fagl {
 
 	void faglGenerateMipmap(MIPMAP_TARGET target);
 
-	void faglGenerateTextureMipmap(GLuint texture);
+	void faglGenerateTextureMipmap(FAGLtexture texture);
 
-	GLuint faglCreateShader(CREATE_SHADER_TYPE shaderType);
+	FAGLprogram faglCreateProgram();
+
+	void faglUseProgram(FAGLprogram program);
+
+	void faglLinkProgram(FAGLprogram program);
+
+	FAGLshader faglCreateShader(CREATE_SHADER_TYPE shaderType);
+
+	void faglShaderSource(FAGLshader shader, GLsizei count, const GLchar** string, const GLint* length);
+
+	void faglCompileShader(FAGLshader shader);
+
+	void faglGetShaderInfoLog(FAGLshader shader, GLsizei maxLength, GLsizei* length, GLchar* infoLog);
 
 	void faglReadPixels(GLint x, GLint y, GLsizei width, GLsizei height, READ_PIXEL_FORMAT format, READ_PIXEL_TYPE type, void* data);
 
@@ -249,9 +268,9 @@ namespace fagl {
 
 	void faglReadnPixels(GLsizei width, GLsizei height, READ_PIXEL_FORMAT format, READ_PIXEL_TYPE type, GLsizei bufSize, void* data);
 
-	GLint faglGetUniformLocation(GLuint program, const GLchar* name);
+	FAGLuniform faglGetUniformLocation(FAGLprogram program, const GLchar* name);
 
-	GLint faglGetUniformLocation(const GLchar* name);
+	FAGLuniform faglGetUniformLocation(const GLchar* name);
 
 	void faglGetBooleanv(GET_NAME pname, GLboolean* data);
 
@@ -283,11 +302,15 @@ namespace fagl {
 
 	void faglVertexAttribPointer(GLuint index, GLint size, VERTEX_ATTRIB_POINTER_TYPE type, BOOLEAN normalized, GLsizei stride, const void* pointer);
 
+	void faglVertexAttribPointer(GLuint index, GLint size, VERTEX_ATTRIB_POINTER_TYPE type, GLsizei stride, const void* pointer);
+
 	void faglVertexAttribIPointer(GLuint index, GLint size, VERTEX_ATTRIB_POINTER_TYPE type, GLsizei stride, const void* pointer);
 
 	void faglVertexAttribLPointer(GLuint index, GLint size, VERTEX_ATTRIB_POINTER_TYPE type, GLsizei stride, const void* pointer);
 
 	void faglVertexAttribPointerC(GLuint index, GLint size, VERTEX_ATTRIB_POINTER_TYPE type, BOOLEAN normalized, GLsizei stride, const void* pointer);
+
+	void faglVertexAttribPointerC(GLuint index, GLint size, VERTEX_ATTRIB_POINTER_TYPE type, GLsizei stride, const void* pointer);
 
 	void faglVertexAttribIPointerC(GLuint index, GLint size, VERTEX_ATTRIB_POINTER_TYPE type, GLsizei stride, const void* pointer);
 
@@ -299,15 +322,158 @@ namespace fagl {
 
 	void faglDrawElements(DRAW_MODE mode, GLsizei count, DRAW_TYPE type, const void* indices);
 
-	void faglAttachShader(GLuint program, GLuint shader);
+	void faglAttachShader(FAGLprogram program, FAGLshader shader);
 
-	void faglAttachShader(GLuint program, GLuint count, GLuint *shaders);
+	void faglAttachShader(FAGLprogram program, GLuint count, FAGLshader*shaders);
 
-	void faglAttachShader(GLuint program, std::vector<GLuint> shaders);
+	void faglAttachShader(FAGLprogram program, std::vector<FAGLshader> shaders);
 
 	void faglReadBuffer(READ_BUFFER_MODE mode);
 
-	void faglNamedFramebufferReadBuffer(GLuint framebuffer, READ_BUFFER_MODE mode);
+	void faglNamedFramebufferReadBuffer(FAGLframebuffer framebuffer, READ_BUFFER_MODE mode);
 
+	void faglUniform1f(FAGLuniform location, GLfloat v0);
+
+	void faglUniform2f(FAGLuniform location, GLfloat v0, GLfloat v1);
+
+	void faglUniform3f(FAGLuniform location, GLfloat v0, GLfloat v1, GLfloat v2);
+
+	void faglUniform4f(FAGLuniform location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3);
+
+	void faglUniform1i(FAGLuniform location, GLint v0);
+
+	void faglUniform2i(FAGLuniform location, GLint v0, GLint v1);
+
+	void faglUniform3i(FAGLuniform location, GLint v0, GLint v1, GLint v2);
+
+	void faglUniform4i(FAGLuniform location, GLint v0, GLint v1, GLint v2, GLint v3);
+
+	void faglUniform1ui(FAGLuniform location, GLuint v0);
+
+	void faglUniform2ui(FAGLuniform location, GLuint v0, GLuint v1);
+
+	void faglUniform3ui(FAGLuniform location, GLuint v0, GLuint v1, GLuint v2);
+
+	void faglUniform4ui(FAGLuniform location, GLuint v0, GLuint v1, GLuint v2, GLuint v3);
+
+	void faglUniform1fv(FAGLuniform location, GLsizei count, const GLfloat* value);
+
+	void faglUniform1fv(FAGLuniform location, const GLfloat* value);
+
+	void faglUniform2fv(FAGLuniform location, GLsizei count, const GLfloat* value);
+
+	void faglUniform2fv(FAGLuniform location, const GLfloat* value);
+
+	void faglUniform3fv(FAGLuniform location, GLsizei count, const GLfloat* value);
+
+	void faglUniform3fv(FAGLuniform location, const GLfloat* value);
+
+	void faglUniform4fv(FAGLuniform location, GLsizei count, const GLfloat* value);
+
+	void faglUniform4fv(FAGLuniform location, const GLfloat* value);
+
+	void faglUniform1iv(FAGLuniform location, GLsizei count, const GLint* value);
+
+	void faglUniform1iv(FAGLuniform location, const GLint* value);
+
+	void faglUniform2iv(FAGLuniform location, GLsizei count, const GLint* value);
+
+	void faglUniform2iv(FAGLuniform location, const GLint* value);
+
+	void faglUniform3iv(FAGLuniform location, GLsizei count, const GLint* value);
+
+	void faglUniform3iv(FAGLuniform location, const GLint* value);
+
+	void faglUniform4iv(FAGLuniform location, GLsizei count, const GLint* value);
+
+	void faglUniform4iv(FAGLuniform location, const GLint* value);
+
+	void faglUniform1uiv(FAGLuniform location, GLsizei count, const GLuint* value);
+
+	void faglUniform1uiv(FAGLuniform location, const GLuint* value);
+
+	void faglUniform2uiv(FAGLuniform location, GLsizei count, const GLuint* value);
+
+	void faglUniform2uiv(FAGLuniform location, const GLuint* value);
+
+	void faglUniform3uiv(FAGLuniform location, GLsizei count, const GLuint* value);
+
+	void faglUniform3uiv(FAGLuniform location, const GLuint* value);
+
+	void faglUniform4uiv(FAGLuniform location, GLsizei count, const GLuint* value);
+
+	void faglUniform4uiv(FAGLuniform location, const GLuint* value);
+
+	void faglUniformMatrix2fv(FAGLuniform location, GLsizei count, BOOLEAN transpose, const GLfloat* value);
+
+	void faglUniformMatrix2fv(FAGLuniform location, BOOLEAN transpose, const GLfloat* value);
+
+	void faglUniformMatrix2fv(FAGLuniform location, GLsizei count, const GLfloat* value);
+
+	void faglUniformMatrix2fv(FAGLuniform location, const GLfloat* value);
+
+	void faglUniformMatrix3fv(FAGLuniform location, GLsizei count, BOOLEAN transpose, const GLfloat* value);
+
+	void faglUniformMatrix3fv(FAGLuniform location, BOOLEAN transpose, const GLfloat* value);
+
+	void faglUniformMatrix3fv(FAGLuniform location, GLsizei count,const GLfloat* value);
+
+	void faglUniformMatrix3fv(FAGLuniform location, const GLfloat* value);
+
+	void faglUniformMatrix4fv(FAGLuniform location, GLsizei count, BOOLEAN transpose, const GLfloat* value);
+
+	void faglUniformMatrix4fv(FAGLuniform location, BOOLEAN transpose, const GLfloat* value);
+
+	void faglUniformMatrix4fv(FAGLuniform location, GLsizei count, const GLfloat* value);
+
+	void faglUniformMatrix4fv(FAGLuniform location, const GLfloat* value);
+
+	void faglUniformMatrix2x3fv(FAGLuniform location, GLsizei count, BOOLEAN transpose, const GLfloat* value);
+
+	void faglUniformMatrix2x3fv(FAGLuniform location, BOOLEAN transpose, const GLfloat* value);
+
+	void faglUniformMatrix2x3fv(FAGLuniform location, GLsizei count, const GLfloat* value);
+
+	void faglUniformMatrix2x3fv(FAGLuniform location, const GLfloat* value);
+
+	void faglUniformMatrix3x2fv(FAGLuniform location, GLsizei count, BOOLEAN transpose, const GLfloat* value);
+
+	void faglUniformMatrix3x2fv(FAGLuniform location, BOOLEAN transpose, const GLfloat* value);
+
+	void faglUniformMatrix3x2fv(FAGLuniform location, GLsizei count, const GLfloat* value);
+
+	void faglUniformMatrix3x2fv(FAGLuniform location, const GLfloat* value);
+
+	void faglUniformMatrix2x4fv(FAGLuniform location, GLsizei count, BOOLEAN transpose, const GLfloat* value);
+
+	void faglUniformMatrix2x4fv(FAGLuniform location, BOOLEAN transpose, const GLfloat* value);
+
+	void faglUniformMatrix2x4fv(FAGLuniform location, GLsizei count, const GLfloat* value);
+
+	void faglUniformMatrix2x4fv(FAGLuniform location, const GLfloat* value);
+
+	void faglUniformMatrix4x2fv(FAGLuniform location, GLsizei count, BOOLEAN transpose, const GLfloat* value);
+
+	void faglUniformMatrix4x2fv(FAGLuniform location, BOOLEAN transpose, const GLfloat* value);
+
+	void faglUniformMatrix4x2fv(FAGLuniform location, GLsizei count, const GLfloat* value);
+
+	void faglUniformMatrix4x2fv(FAGLuniform location, const GLfloat* value);
+
+	void faglUniformMatrix3x4fv(FAGLuniform location, GLsizei count, BOOLEAN transpose, const GLfloat* value);
+
+	void faglUniformMatrix3x4fv(FAGLuniform location, BOOLEAN transpose, const GLfloat* value);
+
+	void faglUniformMatrix3x4fv(FAGLuniform location, GLsizei count, const GLfloat* value);
+
+	void faglUniformMatrix3x4fv(FAGLuniform location, const GLfloat* value);
+
+	void faglUniformMatrix4x3fv(FAGLuniform location, GLsizei count, BOOLEAN transpose, const GLfloat* value);
+
+	void faglUniformMatrix4x3fv(FAGLuniform location, BOOLEAN transpose, const GLfloat* value);
+
+	void faglUniformMatrix4x3fv(FAGLuniform location, GLsizei count, const GLfloat* value);
+
+	void faglUniformMatrix4x3fv(FAGLuniform location, const GLfloat* value);
 }
 #endif
