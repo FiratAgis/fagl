@@ -323,19 +323,35 @@ namespace fagl {
 
 	void faglVertexAttribPointer(GLuint index, GLint size, VERTEX_ATTRIB_POINTER_TYPE type, BOOLEAN normalized, GLsizei stride, const void* pointer);
 
+	void faglVertexAttribPointer(GLuint index, GLint size, BOOLEAN normalized, GLsizei stride, const void* pointer);
+
 	void faglVertexAttribPointer(GLuint index, GLint size, VERTEX_ATTRIB_POINTER_TYPE type, GLsizei stride, const void* pointer);
+
+	void faglVertexAttribPointer(GLuint index, GLint size, GLsizei stride, const void* pointer);
 
 	void faglVertexAttribIPointer(GLuint index, GLint size, VERTEX_ATTRIB_POINTER_TYPE type, GLsizei stride, const void* pointer);
 
+	void faglVertexAttribIPointer(GLuint index, GLint size, GLsizei stride, const void* pointer);
+
 	void faglVertexAttribLPointer(GLuint index, GLint size, VERTEX_ATTRIB_POINTER_TYPE type, GLsizei stride, const void* pointer);
+
+	void faglVertexAttribLPointer(GLuint index, GLint size, GLsizei stride, const void* pointer);
 
 	void faglVertexAttribPointerC(GLuint index, GLint size, VERTEX_ATTRIB_POINTER_TYPE type, BOOLEAN normalized, GLsizei stride, const void* pointer);
 
+	void faglVertexAttribPointerC(GLuint index, GLint size, BOOLEAN normalized, GLsizei stride, const void* pointer);
+
 	void faglVertexAttribPointerC(GLuint index, GLint size, VERTEX_ATTRIB_POINTER_TYPE type, GLsizei stride, const void* pointer);
+
+	void faglVertexAttribPointerC(GLuint index, GLint size, GLsizei stride, const void* pointer);
 
 	void faglVertexAttribIPointerC(GLuint index, GLint size, VERTEX_ATTRIB_POINTER_TYPE type, GLsizei stride, const void* pointer);
 
+	void faglVertexAttribIPointerC(GLuint index, GLint size, GLsizei stride, const void* pointer);
+
 	void faglVertexAttribLPointerC(GLuint index, GLint size, VERTEX_ATTRIB_POINTER_TYPE type, GLsizei stride, const void* pointer);
+
+	void faglVertexAttribLPointerC(GLuint index, GLint size, GLsizei stride, const void* pointer);
 
 	void faglDrawArrays(DRAW_MODE mode, GLint first, GLsizei count);
 

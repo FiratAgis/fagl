@@ -1,5 +1,6 @@
 #include <cstring>
 #include <glm/gtc/matrix_transform.hpp>
+#include "Window.h"
 
 #pragma warning(disable : 4996)
 
@@ -67,6 +68,7 @@ namespace fagl {
 		glClearStencil(0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	}
+
 	void Reshape(GLFWwindow* window, int w, int h)
 	{
 		w = w < 1 ? 1 : w;
