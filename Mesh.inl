@@ -242,7 +242,7 @@ namespace fagl {
 		unsigned int count = 0;
 		for (unsigned int i = 0; i < attributes.size(); i++) {
 			unsigned int size = AttributeElementCount(attributes[i]);
-			faglVertexAttribPointerC(i, size, attributeElementCount * sizeof(float), (void*)(count * sizeof(float)));
+			faglVertexAttribPointerC(i, size, attributeElementCount * sizeof(GLfloat), (void*)(count * sizeof(GLfloat)));
 			count += size;
 		}
 #ifdef _FAGL_PROGRESS_VERBOSE
@@ -298,7 +298,7 @@ namespace fagl {
 #ifdef _FAGL_PROGRESS_VERBOSE
 		cout << "Setting attributes" << endl;
 #endif
-		faglVertexAttribPointerC(0, attributeElementCount, attributeElementCount * sizeof(float), (void*)(0 * sizeof(float)));
+		faglVertexAttribPointerC(0, attributeElementCount, attributeElementCount * sizeof(GLfloat), (void*)(0 * sizeof(GLfloat)));
 #ifdef _FAGL_PROGRESS_VERBOSE
 		cout << "Finished VAO creation" << endl;
 #endif
@@ -370,8 +370,8 @@ namespace fagl {
 #ifdef _FAGL_PROGRESS_VERBOSE
 		cout << "Setting attributes" << endl;
 #endif
-		faglVertexAttribPointerC(0, size1, attributeElementCount * sizeof(float), (void*)(0 * sizeof(float)));
-		faglVertexAttribPointerC(1, size2, attributeElementCount * sizeof(float), (void*)(size1 * sizeof(float)));
+		faglVertexAttribPointerC(0, size1, attributeElementCount * sizeof(GLfloat), (void*)(0 * sizeof(GLfloat)));
+		faglVertexAttribPointerC(1, size2, attributeElementCount * sizeof(GLfloat), (void*)(size1 * sizeof(GLfloat)));
 #ifdef _FAGL_PROGRESS_VERBOSE
 		cout << "Finished VAO creation" << endl;
 #endif
@@ -461,9 +461,9 @@ namespace fagl {
 		cout << "Setting attributes" << endl;
 #endif
 
-		faglVertexAttribPointerC(0, size1, attributeElementCount * sizeof(float), (void*)(0 * sizeof(float)));
-		faglVertexAttribPointerC(1, size2, attributeElementCount * sizeof(float), (void*)(size1 * sizeof(float)));
-		faglVertexAttribPointerC(2, size3, attributeElementCount * sizeof(float), (void*)((size1 + size2) * sizeof(float)));
+		faglVertexAttribPointerC(0, size1, attributeElementCount * sizeof(GLfloat), (void*)(0 * sizeof(GLfloat)));
+		faglVertexAttribPointerC(1, size2, attributeElementCount * sizeof(GLfloat), (void*)(size1 * sizeof(GLfloat)));
+		faglVertexAttribPointerC(2, size3, attributeElementCount * sizeof(GLfloat), (void*)((size1 + size2) * sizeof(GLfloat)));
 #ifdef _FAGL_PROGRESS_VERBOSE
 		cout << "Finished VAO creation" << endl;
 #endif
