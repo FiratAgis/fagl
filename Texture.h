@@ -89,6 +89,10 @@ namespace fagl {
 	/// <param name="format"> Format of the texture.</param>
 	/// <param name="type"> Type of the texture.</param>
 	void CreateCubeFrameBuffer(FAGLframebuffer*framebuffer, FAGLtexture* texture, const TEXTURE_IMAGE_INTERNAL_FORMAT internalformat, const GLsizei width, const GLsizei height, const TEXTURE_IMAGE_FORMAT format, const TEXTURE_IMAGE_TYPE type);
+
+	void CreatePlainDepthBuffer(FAGLframebuffer* framebuffer, FAGLtexture* texture, const GLsizei width, const GLsizei height, const TEXTURE_IMAGE_TYPE type);
+
+	void CreateCubeDepthBuffer(FAGLframebuffer* framebuffer, FAGLtexture* texture, const GLsizei width, const GLsizei height, const TEXTURE_IMAGE_TYPE type);
 }
 
 #include "Texture.inl"
