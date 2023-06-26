@@ -1,5 +1,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#include "stb_image_write.h"
 #include "Texture.h"
 
 namespace fagl {
@@ -310,5 +312,17 @@ namespace fagl {
 		faglUnbindFramebuffer();
 	}
 
-
+	void WriteFrameBufferToFile(FAGLframebuffer framebuffer, string filename, int width, int height)
+	{
+		GLsizei nrChannels = 3;
+		GLsizei stride = nrChannels * width;
+		stride += (stride % 4) ? (4 - stride % 4) : 0;
+		GLsizei bufferSize = stride * height;
+		std::vector<char> buffer(bufferSize);
+		glPixelStorei(GL_PACK_ALIGNMENT, 4);
+		faglNamedFramebufferReadBuffer(framebuffer, READ_BUFFER_MODE::FRONT);
+		faglReadPixels(width, height, READ_PIXEL_FORMAT::RGB, READ_PIXEL_TYPE::UNSIGNED_BYTE, buffer.data());
+		stbi_flip_vertically_on_write(true);
+		stbi_write_png(filename.c_str(), width, height, nrChannels, buffer.data(), stride);
+	}
 }

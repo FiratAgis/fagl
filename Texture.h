@@ -90,9 +90,34 @@ namespace fagl {
 	/// <param name="type"> Type of the texture.</param>
 	void CreateCubeFrameBuffer(FAGLframebuffer*framebuffer, FAGLtexture* texture, const TEXTURE_IMAGE_INTERNAL_FORMAT internalformat, const GLsizei width, const GLsizei height, const TEXTURE_IMAGE_FORMAT format, const TEXTURE_IMAGE_TYPE type);
 
+	/// <summary>
+	/// Creates a frame buffer for depth information and associated 2d texture to be written and read.
+	/// </summary>
+	/// <param name="framebuffer"> Pointer to the frame buffer.</param>
+	/// <param name="texture"> Pointer to the texture.</param>
+	/// <param name="width"> Width of the texture and the frame buffer.</param>
+	/// <param name="height"> Height of the texture and the frame buffer.</param>
+	/// <param name="type"> Type of the texture.</param>
 	void CreatePlainDepthBuffer(FAGLframebuffer* framebuffer, FAGLtexture* texture, const GLsizei width, const GLsizei height, const TEXTURE_IMAGE_TYPE type);
 
+	/// <summary>
+	/// Creates a frame buffer for depth information and associated cubemap texture to be written and read.
+	/// </summary>
+	/// <param name="framebuffer"> Pointer to the frame buffer.</param>
+	/// <param name="texture"> Pointer to the texture.</param>
+	/// <param name="width"> Width of the texture and the frame buffer.</param>
+	/// <param name="height"> Height of the texture and the frame buffer.</param>
+	/// <param name="type"> Type of the texture.</param>
 	void CreateCubeDepthBuffer(FAGLframebuffer* framebuffer, FAGLtexture* texture, const GLsizei width, const GLsizei height, const TEXTURE_IMAGE_TYPE type);
+
+	/// <summary>
+	/// Writes a frame buffer to a png file
+	/// </summary>
+	/// <param name="framebuffer"> Name of the frame buffer.</param>
+	/// <param name="filename"> Name of the png file.</param>
+	/// <param name="width"> Width of the frame buffer.</param>
+	/// <param name="height"> Height of the frame buffer.</param>
+	void WriteFrameBufferToFile(FAGLframebuffer framebuffer, string filename, int width, int height);
 }
 
 #include "Texture.inl"
