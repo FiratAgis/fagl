@@ -7,7 +7,7 @@ namespace fagl {
 	using std::vector;
 	using std::string;
 
-	vec3 GetColor(const COLOR c) {
+	inline vec3 GetColor(const COLOR c) {
 		switch (c)
 		{
 		case COLOR::WHITE:
@@ -47,7 +47,7 @@ namespace fagl {
 		}
 	}
 
-	unsigned int AttributeElementCount(const ATTRIBUTE_TYPE type) {
+	inline unsigned int AttributeElementCount(const ATTRIBUTE_TYPE type) {
 		switch (type) {
 		case ATTRIBUTE_TYPE::CUSTOM_VEC4_0:
 		case ATTRIBUTE_TYPE::CUSTOM_VEC4_1:
@@ -106,7 +106,7 @@ namespace fagl {
 			return 0;
 		}
 	}
-	unsigned int AttributeElementCount(const std::vector<ATTRIBUTE_TYPE> types)
+	inline unsigned int AttributeElementCount(const std::vector<ATTRIBUTE_TYPE> types)
 	{
 		unsigned int retval = 0;
 		for (ATTRIBUTE_TYPE type : types) {
@@ -114,7 +114,7 @@ namespace fagl {
 		}
 		return retval;
 	}
-	bool IsMaterialAttribute(const ATTRIBUTE_TYPE type)
+	inline bool IsMaterialAttribute(const ATTRIBUTE_TYPE type)
 	{
 		switch (type) {
 		case ATTRIBUTE_TYPE::CUSTOM_MATERIAL_VEC4_0:
@@ -148,7 +148,7 @@ namespace fagl {
 			return false;
 		}
 	}
-	bool IsVertexAttribute(const ATTRIBUTE_TYPE type)
+	inline bool IsVertexAttribute(const ATTRIBUTE_TYPE type)
 	{
 		switch (type) {
 		case ATTRIBUTE_TYPE::CUSTOM_VEC4_0:
@@ -179,7 +179,7 @@ namespace fagl {
 			return false;
 		}
 	}
-	bool IsCustomAttribute(const ATTRIBUTE_TYPE type)
+	inline bool IsCustomAttribute(const ATTRIBUTE_TYPE type)
 	{
 		switch (type) {
 		case ATTRIBUTE_TYPE::CUSTOM_MATERIAL_VEC4_0:
@@ -227,7 +227,7 @@ namespace fagl {
 			return false;
 		}
 	}
-	unsigned int CustomAttributeIndex(const ATTRIBUTE_TYPE type)
+	inline unsigned int CustomAttributeIndex(const ATTRIBUTE_TYPE type)
 	{
 		switch (type) {
 		case ATTRIBUTE_TYPE::CUSTOM_MATERIAL_VEC4_4:
@@ -270,11 +270,11 @@ namespace fagl {
 			return 0;
 		}
 	}
-	float Degree(const float rad)
+	inline float Degree(const float rad)
 	{
 		return (float)((rad / 180.0f) * M_PI);
 	}
-	glm::mat4 RotationMatrix(const glm::vec3 rot)
+	inline glm::mat4 RotationMatrix(const glm::vec3 rot)
 	{
 		mat4 rotX = glm::rotate<float>(mat4(1.0f), Degree(rot.x), vec3(1.0f, 0.0f, 0.0f));
 		mat4 rotY = glm::rotate<float>(mat4(1.0f), Degree(rot.y), vec3(0.0f, 1.0f, 0.0f));
@@ -283,17 +283,17 @@ namespace fagl {
 		return rotZ * rotY * rotX;
 	}
 
-	vec3 TransformPoint(const vec3 point, const mat4 transformation)
+	inline vec3 TransformPoint(const vec3 point, const mat4 transformation)
 	{
 		return vec3(transformation * vec4(point, 1.0f));
 	}
 
-	glm::vec3 TransformNormal(const glm::vec3 normal, const glm::mat4 transformation)
+	inline glm::vec3 TransformNormal(const glm::vec3 normal, const glm::mat4 transformation)
 	{
 		return glm::inverse(glm::transpose(glm::mat3(transformation))) * normal;
 	}
 
-	vector<std::string> Tokenize(const string s, const string token)
+	inline vector<std::string> Tokenize(const string s, const string token)
 	{
 		vector<string> elements;
 		string temp;
@@ -329,7 +329,7 @@ namespace fagl {
 		return elements;
 	}
 
-	vector<int> TokenizeAsInteger(const string s, const string token)
+	inline vector<int> TokenizeAsInteger(const string s, const string token)
 	{
 		vector<string> temp = Tokenize(s, token);
 		vector<int> retVal;
@@ -343,7 +343,7 @@ namespace fagl {
 		}
 		return retVal;
 	}
-	vector<float> TokenizeAsFloat(const string s, const string token)
+	inline vector<float> TokenizeAsFloat(const string s, const string token)
 	{
 		vector<string> temp = Tokenize(s, token);
 		vector<float> retVal;
@@ -358,7 +358,7 @@ namespace fagl {
 		return retVal;
 	}
 
-	bool CompareWithoutCase(char first, char second)
+	inline bool CompareWithoutCase(char first, char second)
 	{
 		if (isupper(second)) {
 			return first == second || first == second - 32;
@@ -371,7 +371,7 @@ namespace fagl {
 		}
 	}
 
-	bool CompareWithoutCase(std::string first, std::string second)
+	inline bool CompareWithoutCase(std::string first, std::string second)
 	{
 		if (first.length() < second.length()) {
 			return false;
@@ -384,12 +384,12 @@ namespace fagl {
 		return true;
 	}
 
-	glm::vec3 GetSurfaceNormal(glm::vec3 p1, glm::vec3 p2, glm::vec3 p3)
+	inline glm::vec3 GetSurfaceNormal(glm::vec3 p1, glm::vec3 p2, glm::vec3 p3)
 	{
 		return glm::vec3();
 	}
 
-	bool IsComplete(glm::ivec3 v1)
+	inline bool IsComplete(glm::ivec3 v1)
 	{
 		return v1.x >= 0 && v1.y >= 0 && v1.z >= 0;
 	}
