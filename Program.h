@@ -30,7 +30,7 @@ namespace fagl {
 	/// <param name="gs"> Path of the geometry shader.</param>
 	/// <param name="fs"> Path of the fragment shader.</param>
 	/// <returns> Pointer to the program.</returns>
-	GLuint CreateProgram(const std::string vs = std::string(""), const std::string tcs = std::string(""), const std::string tes = std::string(""), const std::string gs = std::string(""), const std::string fs = std::string(""));
+	FAGLprogram CreateProgram(const std::string vs = std::string(""), const std::string tcs = std::string(""), const std::string tes = std::string(""), const std::string gs = std::string(""), const std::string fs = std::string(""));
 }
 
 #include "Program.inl"
