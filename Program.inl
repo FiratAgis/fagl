@@ -1,7 +1,7 @@
 namespace fagl {
 	using std::string;
 
-	bool ReadDataFromFile(const string& fileName, string& data)
+	inline bool ReadDataFromFile(const string& fileName, string& data)
 	{
 		std::fstream myfile;
 
@@ -30,7 +30,7 @@ namespace fagl {
 		return true;
 	}
 
-	FAGLshader CreateShader(const string shaderName, CREATE_SHADER_TYPE shaderType)
+	inline FAGLshader CreateShader(const string shaderName, CREATE_SHADER_TYPE shaderType)
 	{
 		string shaderSource;
 
@@ -74,7 +74,7 @@ namespace fagl {
 		return s;
 	}
 
-	FAGLprogram CreateProgram(const string vs, const string tcs, const string tes, const string gs, const string fs)
+	inline FAGLprogram CreateProgram(const string vs, const string tcs, const string tes, const string gs, const string fs)
 	{
 		FAGLprogram gProgram = faglCreateProgram();
 		if (!vs.empty()) {
