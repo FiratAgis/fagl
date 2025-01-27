@@ -9,17 +9,17 @@ namespace fagl {
 	void (*PressedKeyAction)(int);
 	void (*ReleasedKeyAction)(int);
 
-	void KeyPressed(int key) {
+	inline void KeyPressed(int key) {
 		key_held_down[key] = true;
 		PressedKeyAction(key);
 	}
 
-	void KeyReleased(int key) {
+	inline void KeyReleased(int key) {
 		key_held_down[key] = false;
 		ReleasedKeyAction(key);
 	}
 
-	void ParseKeyboardEvent(GLFWwindow* window, int key, int scancode, int action, int mods) {
+	inline void ParseKeyboardEvent(GLFWwindow* window, int key, int scancode, int action, int mods) {
 		if (action == GLFW_PRESS) {
 			KeyPressed(key);
 		}
@@ -31,7 +31,7 @@ namespace fagl {
 	/// <summary>
 	/// Parses currently held keys. Should be called once a frame.
 	/// </summary>
-	void ParseHoldKeys() {
+	inline void ParseHoldKeys() {
 		for (unsigned int i = 0; i <= GLFW_KEY_LAST; i++) {
 			if (key_held_down[i])
 				HoldKeyAction(i);
@@ -45,7 +45,7 @@ namespace fagl {
 	/// <param name="hold"> The function to be called when a key is hold.</param>
 	/// <param name="press"> The function to be called when a key is pressed.</param>
 	/// <param name="release"> The function to be called when a key is released.</param>
-	void InitKeyboard(GLFWwindow* window, void (*hold)(int), void (*press)(int), void (*release)(int)) {
+	inline void InitKeyboard(GLFWwindow* window, void (*hold)(int), void (*press)(int), void (*release)(int)) {
 		HoldKeyAction = hold;
 		PressedKeyAction = press;
 		ReleasedKeyAction = release;
