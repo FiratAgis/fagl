@@ -18,63 +18,63 @@ namespace fagl {
 		/// </summary>
 		/// <param name="i"> index of the custom attribute. </param>
 		/// <returns> Value of ATTRIBUTE_TYPE::CUSTOM(_MATERIAL)_VEC4_i. </returns>
-		glm::vec4 GetCustom4(const unsigned int i) const { return custom_vec4[i]; }
+		inline glm::vec4 GetCustom4(const unsigned int i) const { return custom_vec4[i]; }
 
 		/// <summary>
 		/// Get function for custom attributes that are vec3. 
 		/// </summary>
 		/// <param name="i"> index of the custom attribute. </param>
 		/// <returns> Value of ATTRIBUTE_TYPE::CUSTOM(_MATERIAL)_VEC3_i. </returns>
-		glm::vec3 GetCustom3(const unsigned int i) const { return custom_vec3[i]; }
+		inline glm::vec3 GetCustom3(const unsigned int i) const { return custom_vec3[i]; }
 
 		/// <summary>
 		/// Get function for custom attributes that are vec2. 
 		/// </summary>
 		/// <param name="i"> index of the custom attribute. </param>
 		/// <returns> Value of ATTRIBUTE_TYPE::CUSTOM(_MATERIAL)_VEC2_i. </returns>
-		glm::vec2 GetCustom2(const unsigned int i) const { return custom_vec2[i]; }
+		inline glm::vec2 GetCustom2(const unsigned int i) const { return custom_vec2[i]; }
 
 		/// <summary>
 		/// Get function for custom attributes that are vec1. 
 		/// </summary>
 		/// <param name="i"> index of the custom attribute. </param>
 		/// <returns> Value of ATTRIBUTE_TYPE::CUSTOM(_MATERIAL)_VEC1_i. </returns>
-		glm::vec1 GetCustom1(const unsigned int i) const { return custom_vec1[i]; }
+		inline glm::vec1 GetCustom1(const unsigned int i) const { return custom_vec1[i]; }
 
 		/// <summary>
 		/// Get function for attributes that are vec1. 
 		/// </summary>
 		/// <param name="type"> Type of the attribute. </param>
 		/// <returns> Value of the Attribute. </returns>
-		virtual glm::vec1 GetAttribute1(const ATTRIBUTE_TYPE type) const { return glm::vec1(); }
+		inline virtual glm::vec1 GetAttribute1(const ATTRIBUTE_TYPE type) const { return glm::vec1(); }
 
 		/// <summary>
 		/// Get function for attributes that are vec2. 
 		/// </summary>
 		/// <param name="type"> Type of the attribute. </param>
 		/// <returns> Value of the Attribute. </returns>
-		virtual glm::vec2 GetAttribute2(const ATTRIBUTE_TYPE type) const { return glm::vec2(); }
+		inline virtual glm::vec2 GetAttribute2(const ATTRIBUTE_TYPE type) const { return glm::vec2(); }
 
 		/// <summary>
 		/// Get function for attributes that are vec3. 
 		/// </summary>
 		/// <param name="type"> Type of the attribute. </param>
 		/// <returns> Value of the Attribute. </returns>
-		virtual glm::vec3 GetAttribute3(const ATTRIBUTE_TYPE type) const { return glm::vec3(); }
+		inline virtual glm::vec3 GetAttribute3(const ATTRIBUTE_TYPE type) const { return glm::vec3(); }
 
 		/// <summary>
 		/// Get function for attributes that are vec4. 
 		/// </summary>
 		/// <param name="type"> Type of the attribute. </param>
 		/// <returns> Value of the Attribute. </returns>
-		virtual glm::vec4 GetAttribute4(const ATTRIBUTE_TYPE type) const { return glm::vec4(); }
+		inline virtual glm::vec4 GetAttribute4(const ATTRIBUTE_TYPE type) const { return glm::vec4(); }
 
 		/// <summary>
 		/// Get function for attributes. 
 		/// </summary>
 		/// <param name="type"> Type of the attribute. </param>
 		/// <returns> Value of the Attribute. </returns>
-		virtual glm::vec4 GetAttribute(const ATTRIBUTE_TYPE type) const {
+		inline virtual glm::vec4 GetAttribute(const ATTRIBUTE_TYPE type) const {
 			unsigned int size = AttributeElementCount(type);
 			switch (size) {
 			case 4:
@@ -95,28 +95,28 @@ namespace fagl {
 		/// </summary>
 		/// <param name="i"> Index of the custom attribute. </param>
 		/// <param name="value"> New value of ATTRIBUTE_TYPE::CUSTOM(_MATERIAL)_VEC4_i.</param>
-		void SetCustom4(const unsigned int i, glm::vec4 value) { custom_vec4[i] = glm::vec4(value); }
+		inline void SetCustom4(const unsigned int i, glm::vec4 value) { custom_vec4[i] = glm::vec4(value); }
 
 		/// <summary>
 		/// Set function for custom attributes that are vec3. 
 		/// </summary>
 		/// <param name="i"> Index of the custom attribute. </param>
 		/// <param name="value"> New value of ATTRIBUTE_TYPE::CUSTOM(_MATERIAL)_VEC3_i.</param>
-		void SetCustom3(const unsigned int i, glm::vec3 value) { custom_vec3[i] = glm::vec3(value); }
+		inline void SetCustom3(const unsigned int i, glm::vec3 value) { custom_vec3[i] = glm::vec3(value); }
 
 		/// <summary>
 		/// Set function for custom attributes that are vec2. 
 		/// </summary>
 		/// <param name="i"> Index of the custom attribute. </param>
 		/// <param name="value"> New value of ATTRIBUTE_TYPE::CUSTOM(_MATERIAL)_VEC2_i.</param>
-		void SetCustom2(const unsigned int i, glm::vec2 value) { custom_vec2[i] = glm::vec2(value); }
+		inline void SetCustom2(const unsigned int i, glm::vec2 value) { custom_vec2[i] = glm::vec2(value); }
 
 		/// <summary>
 		/// Set function for custom attributes that are vec1. 
 		/// </summary>
 		/// <param name="i"> Index of the custom attribute. </param>
 		/// <param name="value"> New value of ATTRIBUTE_TYPE::CUSTOM(_MATERIAL)_VEC1_i.</param>
-		void SetCustom1(const unsigned int i, glm::vec1 value) { custom_vec1[i] = glm::vec1(value); }
+		inline void SetCustom1(const unsigned int i, glm::vec1 value) { custom_vec1[i] = glm::vec1(value); }
 	};
 }
 
