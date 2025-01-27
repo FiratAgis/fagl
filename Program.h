@@ -19,7 +19,7 @@ namespace fagl {
 	/// <param name="shaderName"> Name of the shader file.</param>
 	/// <param name="shaderType"> Type of the shader file.</param>
 	/// <returns> Pointer to the read shader.</returns>
-	GLuint CreateShader(const std::string shaderName, CREATE_SHADER_TYPE shaderType);
+	FAGLshader CreateShader(const std::string shaderName, CREATE_SHADER_TYPE shaderType);
 
 	/// <summary>
 	/// Creates a program and binds given shaders to it.
